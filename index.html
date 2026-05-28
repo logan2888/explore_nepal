@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExploreNepal — Tourism Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <a href="#home" class="nav-logo">🏔️ ExploreNepal</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#search-section">Search</a></li>
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#hotels">Hotels</a></li>
+    <li><a href="#restaurants">Restaurants</a></li>
+    <li><a href="#map-section">Map</a></li>
+    <li><a href="#planner">Planner</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-auth" id="nav-auth">
+    <button class="nav-login-btn" onclick="openAuthModal('login')">🔐 Login</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="#home"           onclick="closeMob()">Home</a>
+  <a href="#search-section" onclick="closeMob()">Search</a>
+  <a href="#destinations"   onclick="closeMob()">Destinations</a>
+  <a href="#hotels"         onclick="closeMob()">Hotels</a>
+  <a href="#restaurants"    onclick="closeMob()">Restaurants</a>
+  <a href="#map-section"    onclick="closeMob()">Map</a>
+  <a href="#planner"        onclick="closeMob()">Trip Planner</a>
+  <a href="#gallery"        onclick="closeMob()">Gallery</a>
+  <a href="#about"          onclick="closeMob()">About</a>
+  <a href="#contact"        onclick="closeMob()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Welcome to Nepal</span>
+    <h1>Discover the <span class="gold">Roof of the World</span></h1>
+    <p class="hero-sub">Mountains, temples, jungles and culture unlike anywhere on Earth.</p>
+    <div class="hero-search-box">
+      <input type="text" id="hero-q" placeholder="Search destinations, e.g. Everest, Pokhara, Chitwan…" />
+      <button onclick="heroSearch()">Search</button>
+    </div>
+    <div class="hero-btns">
+      <a href="#destinations" class="btn btn-green">Explore Places</a>
+      <a href="#planner"      class="btn btn-white">Plan My Trip</a>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ scroll</div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><span class="sn">8,849<small>m</small></span><span class="sl">Everest Height</span></div>
+  <div class="stat"><span class="sn">10</span><span class="sl">UNESCO Sites</span></div>
+  <div class="stat"><span class="sn">800+</span><span class="sl">Bird Species</span></div>
+  <div class="stat"><span class="sn">125</span><span class="sl">Ethnic Groups</span></div>
+  <div class="stat"><span class="sn">30</span><span class="sl">Destinations</span></div>
+</div>
+
+<!-- SEARCH -->
+<section class="section" id="search-section">
+  <div class="sec-head">
+    <span class="sec-tag">Find a Place</span>
+    <h2>Search Destinations</h2>
+    <p>Type any name, category or province to find it instantly</p>
+  </div>
+  <div class="search-bar-wrap">
+    <input type="text" id="main-q" placeholder="e.g. Everest, heritage, Gandaki, nature…" oninput="liveSearch(this.value)" />
+    <button onclick="liveSearch(document.getElementById('main-q').value)">🔍 Search</button>
+  </div>
+  <div class="detail-panel" id="detail-panel"></div>
+  <div class="cards-grid" id="search-grid" style="margin-top:32px;"></div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="section sec-alt" id="destinations">
+  <div class="sec-head">
+    <span class="sec-tag">Top Places</span>
+    <h2>Must-Visit Destinations</h2>
+    <p>From Himalayan peaks to ancient valley temples</p>
+  </div>
+  <div class="filter-bar">
+    <button class="fbtn active" data-f="all">All</button>
+    <button class="fbtn" data-f="mountain">🏔 Mountains</button>
+    <button class="fbtn" data-f="heritage">🏛 Heritage</button>
+    <button class="fbtn" data-f="lake">💧 Lakes</button>
+    <button class="fbtn" data-f="nature">🌿 Nature</button>
+  </div>
+  <div id="dest-detail-panel" class="detail-panel"></div>
+  <div class="cards-grid" id="dest-grid"></div>
+</section>
+
+<!-- HOTELS -->
+<section class="section" id="hotels">
+  <div class="sec-head">
+    <span class="sec-tag">Stay</span>
+    <h2>Hotels &amp; Accommodation</h2>
+    <p>From luxury resorts to cosy Himalayan guesthouses</p>
+  </div>
+  <div class="filter-bar">
+    <button class="hbtn active" data-fh="all">All</button>
+    <button class="hbtn" data-fh="Luxury Hotel">⭐ Luxury</button>
+    <button class="hbtn" data-fh="Resort">🏝 Resort</button>
+    <button class="hbtn" data-fh="Guesthouse">🏠 Guesthouse</button>
+    <button class="hbtn" data-fh="Eco Lodge">🌿 Eco Lodge</button>
+  </div>
+  <div id="hotel-detail-panel" class="detail-panel"></div>
+  <div class="cards-grid" id="hotel-grid"></div>
+</section>
+
+<!-- RESTAURANTS -->
+<section class="section sec-alt" id="restaurants">
+  <div class="sec-head">
+    <span class="sec-tag">Eat</span>
+    <h2>Restaurants &amp; Food Guide</h2>
+    <p>Savour dal bhat, momos and more at Nepal's best eateries</p>
+  </div>
+  <div class="filter-bar">
+    <button class="rbtn active" data-fr="all">All</button>
+    <button class="rbtn" data-fr="Budget">💚 Budget</button>
+    <button class="rbtn" data-fr="Mid-range">🌟 Mid-range</button>
+    <button class="rbtn" data-fr="Luxury">💎 Luxury</button>
+  </div>
+  <div id="resto-detail-panel" class="detail-panel"></div>
+  <div class="cards-grid" id="resto-grid"></div>
+</section>
+
+<!-- MAP -->
+<section class="section" id="map-section">
+  <div class="sec-head">
+    <span class="sec-tag">Explore</span>
+    <h2>Interactive Map of Nepal</h2>
+    <p>Click any marker to learn about that destination</p>
+  </div>
+  <div class="map-legend">
+    <span><i class="dot" style="background:#1b4332"></i> Mountains</span>
+    <span><i class="dot" style="background:#7b2d00"></i> Heritage</span>
+    <span><i class="dot" style="background:#0066bb"></i> Lakes</span>
+    <span><i class="dot" style="background:#2d6a1f"></i> Nature</span>
+  </div>
+  <div id="the-map"></div>
+</section>
+
+<!-- TRIP PLANNER -->
+<section class="section sec-alt" id="planner">
+  <div class="sec-head">
+    <span class="sec-tag">Plan</span>
+    <h2>Trip Planner</h2>
+    <p>Build your personalised Nepal itinerary day by day</p>
+  </div>
+  <div class="planner-wrap">
+    <div class="planner-left">
+      <h3>Add a Destination</h3>
+      <select id="pick-dest"><option value="">— Choose destination —</option></select>
+      <input type="number" id="pick-day" value="1" min="1" placeholder="Day #" />
+      <button class="btn btn-green" onclick="addToPlanner()">+ Add to Itinerary</button>
+      <p class="plan-tip">💡 Use the same day number to group places on one day.</p>
+    </div>
+    <div class="planner-right" id="planner-board">
+      <p class="plan-empty">Your itinerary is empty. Add destinations on the left!</p>
+    </div>
+  </div>
+  <div class="plan-actions">
+    <button class="btn btn-grey"  onclick="clearPlanner()">🗑 Clear All</button>
+    <button class="btn btn-green" onclick="window.print()">🖨 Print Itinerary</button>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+  <div class="sec-head">
+    <span class="sec-tag">Gallery</span>
+    <h2>Nepal in Pictures</h2>
+    <p>50+ beautiful moments from across the Himalayas — click any photo to enlarge</p>
+  </div>
+
+  <!-- Gallery Filter Tabs -->
+  <div class="gal-filter-bar">
+    <button class="gfbtn active" data-gf="all">🌏 All</button>
+    <button class="gfbtn" data-gf="mountain">🏔 Mountains</button>
+    <button class="gfbtn" data-gf="heritage">🏛 Heritage</button>
+    <button class="gfbtn" data-gf="lake">💧 Lakes</button>
+    <button class="gfbtn" data-gf="nature">🌿 Nature</button>
+    <button class="gfbtn" data-gf="culture">🎭 Culture</button>
+  </div>
+
+  <div class="gallery-grid" id="gallery-grid">
+    <!-- Mountains -->
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg/800px-Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg" alt="Mount Everest North Face" loading="lazy"><span>Mount Everest (8,849m)</span>
+    </div>
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Annapurna_I_from_Annapurna_base_camp.jpg/800px-Annapurna_I_from_Annapurna_base_camp.jpg" alt="Annapurna" loading="lazy"><span>Annapurna Base Camp</span>
+    </div>
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG-Thorong_La_pass.jpg/800px-PNG-Thorong_La_pass.jpg" alt="Thorong La Pass" loading="lazy"><span>Thorong La Pass, Annapurna Circuit</span>
+    </div>
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Manaslu_North.jpg/800px-Manaslu_North.jpg" alt="Manaslu" loading="lazy"><span>Manaslu Circuit (8,163m)</span>
+    </div>
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Langtang_Valley.jpg/800px-Langtang_Valley.jpg" alt="Langtang Valley" loading="lazy"><span>Langtang Valley</span>
+    </div>
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Poon_Hill_Panorama_%285%29.jpg/800px-Poon_Hill_Panorama_%285%29.jpg" alt="Poon Hill" loading="lazy"><span>Poon Hill Sunrise Panorama</span>
+    </div>
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Above_Namche.jpg/800px-Above_Namche.jpg" alt="Namche Bazaar" loading="lazy"><span>Namche Bazaar, Everest Region</span>
+    </div>
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Machhapuchhre.jpg/600px-Machhapuchhre.jpg" alt="Machhapuchhre" loading="lazy"><span>Machhapuchhre (Fishtail Peak)</span>
+    </div>
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Khumbu_glacier.jpg/800px-Khumbu_glacier.jpg" alt="Khumbu Glacier" loading="lazy"><span>Khumbu Glacier, Everest Trek</span>
+    </div>
+    <div class="gal-item" data-cat="mountain" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Gokyo_ri_lake.jpg/800px-Gokyo_ri_lake.jpg" alt="Gokyo Ri" loading="lazy"><span>Gokyo Ri & Ngozumpa Glacier</span>
+    </div>
+
+    <!-- Heritage -->
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Boudhanath_stupa%2C_Kathmandu%2C_Nepal.jpg/800px-Boudhanath_stupa%2C_Kathmandu%2C_Nepal.jpg" alt="Boudhanath Stupa" loading="lazy"><span>Boudhanath Stupa, Kathmandu</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Pashupatinath_Temple.jpg/800px-Pashupatinath_Temple.jpg" alt="Pashupatinath" loading="lazy"><span>Pashupatinath Temple</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Bhaktapur-Durbar-Square.jpg/800px-Bhaktapur-Durbar-Square.jpg" alt="Bhaktapur" loading="lazy"><span>Bhaktapur Durbar Square</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Swayambhunath_stupa.jpg/800px-Swayambhunath_stupa.jpg" alt="Swayambhunath" loading="lazy"><span>Swayambhunath (Monkey Temple)</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Patan_durbar_square.jpg/800px-Patan_durbar_square.jpg" alt="Patan Durbar" loading="lazy"><span>Patan Durbar Square</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Janaki_Temple_in_Janakpur.jpg/800px-Janaki_Temple_in_Janakpur.jpg" alt="Janaki Mandir" loading="lazy"><span>Janaki Mandir, Janakpur</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Lumbini_Mayadevi_Temple_2.jpg/800px-Lumbini_Mayadevi_Temple_2.jpg" alt="Lumbini" loading="lazy"><span>Maya Devi Temple, Lumbini</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Muktinath_temple.jpg/800px-Muktinath_temple.jpg" alt="Muktinath" loading="lazy"><span>Muktinath Temple, Mustang</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Gorkha_Palace.jpg/800px-Gorkha_Palace.jpg" alt="Gorkha Palace" loading="lazy"><span>Gorkha Durbar Palace</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Lo_Manthang_Upper_Mustang.jpg/800px-Lo_Manthang_Upper_Mustang.jpg" alt="Lo Manthang" loading="lazy"><span>Lo Manthang, Upper Mustang</span>
+    </div>
+    <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Nyatapola_Temple%2C_Bhaktapur%2C_Nepal.jpg/600px-Nyatapola_Temple%2C_Bhaktapur%2C_Nepal.jpg" alt="Nyatapola" loading="lazy"><span>Nyatapola Temple, Bhaktapur</span>
+    </div>
+
+    <!-- Lakes -->
+    <div class="gal-item" data-cat="lake" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Phewa_lake_Pokhara_Nepal.jpg/800px-Phewa_lake_Pokhara_Nepal.jpg" alt="Phewa Lake" loading="lazy"><span>Phewa Lake, Pokhara</span>
+    </div>
+    <div class="gal-item" data-cat="lake" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Rara_Lake%2C_Nepal.jpg/800px-Rara_Lake%2C_Nepal.jpg" alt="Rara Lake" loading="lazy"><span>Rara Lake, Karnali</span>
+    </div>
+    <div class="gal-item" data-cat="lake" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Tilicho_lake.jpg/800px-Tilicho_lake.jpg" alt="Tilicho Lake" loading="lazy"><span>Tilicho Lake (4,919m)</span>
+    </div>
+    <div class="gal-item" data-cat="lake" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Gokyo_Lake_Nepal.jpg/800px-Gokyo_Lake_Nepal.jpg" alt="Gokyo Lake" loading="lazy"><span>Gokyo Lakes, Everest Region</span>
+    </div>
+    <div class="gal-item" data-cat="lake" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Gosainkunda_Lake.jpg/800px-Gosainkunda_Lake.jpg" alt="Gosainkunda" loading="lazy"><span>Gosainkunda Sacred Lake</span>
+    </div>
+    <div class="gal-item" data-cat="lake" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Begnas_Lake_Pokhara.jpg/800px-Begnas_Lake_Pokhara.jpg" alt="Begnas Lake" loading="lazy"><span>Begnas Lake, Pokhara</span>
+    </div>
+    <div class="gal-item" data-cat="lake" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Shey_Phoksundo_Lake.jpg/800px-Shey_Phoksundo_Lake.jpg" alt="Phoksundo Lake" loading="lazy"><span>Shey Phoksundo Lake, Dolpo</span>
+    </div>
+
+    <!-- Nature -->
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/One_horned_rhino_chitwan.jpg/800px-One_horned_rhino_chitwan.jpg" alt="Rhino Chitwan" loading="lazy"><span>One-Horned Rhino, Chitwan</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Bengal_tiger_%28Panthera_tigris_tigris%29_female.jpg/800px-Bengal_tiger_%28Panthera_tigris_tigris%29_female.jpg" alt="Bengal Tiger" loading="lazy"><span>Bengal Tiger, Bardia Park</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Chitwan_National_Park.jpg/800px-Chitwan_National_Park.jpg" alt="Chitwan Jungle" loading="lazy"><span>Chitwan National Park Jungle</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Ilam_Tea_Garden_Nepal.jpg/800px-Ilam_Tea_Garden_Nepal.jpg" alt="Ilam Tea" loading="lazy"><span>Ilam Tea Gardens, East Nepal</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Nagarkot_View_Himalayas.jpg/800px-Nagarkot_View_Himalayas.jpg" alt="Nagarkot" loading="lazy"><span>Himalayan View from Nagarkot</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Rhododendron_forest_Ghorepani.jpg/800px-Rhododendron_forest_Ghorepani.jpg" alt="Rhododendron" loading="lazy"><span>Rhododendron Forest, Ghorepani</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Sarangkot_Paragliding_Pokhara.jpg/800px-Sarangkot_Paragliding_Pokhara.jpg" alt="Sarangkot Paragliding" loading="lazy"><span>Paragliding over Pokhara</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Red_Panda_%28Ailurus_fulgens%29.jpg/800px-Red_Panda_%28Ailurus_fulgens%29.jpg" alt="Red Panda" loading="lazy"><span>Red Panda, Rara National Park</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Bandipur_Nepal.jpg/800px-Bandipur_Nepal.jpg" alt="Bandipur" loading="lazy"><span>Bandipur Village at Dawn</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Chandragiri_Hills_Nepal.jpg/800px-Chandragiri_Hills_Nepal.jpg" alt="Chandragiri" loading="lazy"><span>Chandragiri Hills Cable Car</span>
+    </div>
+    <div class="gal-item" data-cat="nature" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bardia_national_park.jpg/800px-Bardia_national_park.jpg" alt="Bardia" loading="lazy"><span>Bardia National Park, West Nepal</span>
+    </div>
+
+    <!-- Culture -->
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Indra_Jatra_festival_Kathmandu.jpg/800px-Indra_Jatra_festival_Kathmandu.jpg" alt="Indra Jatra" loading="lazy"><span>Indra Jatra Festival, Kathmandu</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Nepal_dal_bhat.jpg/800px-Nepal_dal_bhat.jpg" alt="Dal Bhat" loading="lazy"><span>Traditional Dal Bhat Meal</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Momo_Nepal.jpg/800px-Momo_Nepal.jpg" alt="Momos" loading="lazy"><span>Nepali Momos (Dumplings)</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Newari_mask_dance.jpg/800px-Newari_mask_dance.jpg" alt="Newari Dance" loading="lazy"><span>Newari Mask Dance, Bhaktapur</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Prayer_flags_Nepal.jpg/800px-Prayer_flags_Nepal.jpg" alt="Prayer Flags" loading="lazy"><span>Prayer Flags in the Himalayas</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sherpa_family_Khumbu_Nepal.jpg/800px-Sherpa_family_Khumbu_Nepal.jpg" alt="Sherpa Family" loading="lazy"><span>Sherpa Family, Khumbu Valley</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Mithila_paintings_Janakpur.jpg/800px-Mithila_paintings_Janakpur.jpg" alt="Mithila Art" loading="lazy"><span>Mithila Folk Art, Janakpur</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Pashupatinath_aarti.jpg/800px-Pashupatinath_aarti.jpg" alt="Aarti" loading="lazy"><span>Evening Aarti, Pashupatinath</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Tharu_dance_Chitwan.jpg/800px-Tharu_dance_Chitwan.jpg" alt="Tharu Dance" loading="lazy"><span>Tharu Cultural Dance, Chitwan</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Pottery_Bhaktapur.jpg/800px-Pottery_Bhaktapur.jpg" alt="Pottery" loading="lazy"><span>Traditional Pottery, Bhaktapur</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Tihar_festival_Nepal.jpg/800px-Tihar_festival_Nepal.jpg" alt="Tihar" loading="lazy"><span>Tihar Festival of Lights</span>
+    </div>
+    <div class="gal-item" data-cat="culture" onclick="openLightbox(this)">
+      <img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Tansen_Palpa_Nepal.jpg/800px-Tansen_Palpa_Nepal.jpg" alt="Tansen" loading="lazy"><span>Tansen Old Bazaar, Palpa</span>
+    </div>
+  </div>
+
+  <!-- Load More Button -->
+  <div style="text-align:center;margin-top:36px;">
+    <button class="btn btn-green" id="gal-load-more" onclick="loadMoreGallery()">Load More Photos</button>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox-overlay" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-prev" onclick="event.stopPropagation();lbNav(-1)">&#8249;</button>
+  <button class="lb-next" onclick="event.stopPropagation();lbNav(1)">&#8250;</button>
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <img id="lb-img" src="" alt="" />
+    <p id="lb-caption"></p>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section sec-alt" id="about">
+  <div class="sec-head">
+    <span class="sec-tag">About This Project</span>
+    <h2>About ExploreNepal</h2>
+    <p>Final Year Project — Phoenix College of Management, Kathmandu</p>
+  </div>
+  <div class="about-wrap">
+    <div class="about-text">
+      <h3>What is ExploreNepal?</h3>
+      <p>ExploreNepal is a comprehensive web-based tourism guide for Nepal, developed as a Final Year Project for the Bachelor of Information Technology program at Phoenix College of Management. The platform is built using <strong>HTML5, CSS3 and JavaScript</strong> — the three core technologies of the web — with no backend server required in the current phase.</p>
+      <h3>Why was it built?</h3>
+      <p>Despite Nepal being one of the world's finest tourism destinations, its digital infrastructure is scattered and incomplete. Tourists struggle to find reliable up-to-date information in one place. ExploreNepal bridges this gap with a single unified platform covering 30 destinations, hotels, restaurants, maps and trip planning tools.</p>
+      <h3>Key Features</h3>
+      <div class="about-features">
+        <div class="af-item"><span>🔍</span><div><strong>Smart Search</strong><p>Search all 30 destinations by name, province, category or activity.</p></div></div>
+        <div class="af-item"><span>🗺️</span><div><strong>Interactive Map</strong><p>All destinations plotted on a live OpenStreetMap with colour-coded markers.</p></div></div>
+        <div class="af-item"><span>📅</span><div><strong>Trip Planner</strong><p>Build a day-by-day personalised itinerary and print it out.</p></div></div>
+        <div class="af-item"><span>⭐</span><div><strong>User Reviews</strong><p>Submit star ratings and written reviews for any destination.</p></div></div>
+        <div class="af-item"><span>📱</span><div><strong>Fully Responsive</strong><p>Works perfectly on mobile phones, tablets and desktop computers.</p></div></div>
+        <div class="af-item"><span>🖼️</span><div><strong>Real Photos</strong><p>Authentic Wikipedia and Wikimedia photos for every destination.</p></div></div>
+      </div>
+    </div>
+    <div class="about-side">
+      <div class="dev-card">
+        <div class="dev-avatar">RK</div>
+        <h3>Rijan Khatri</h3>
+        <p class="dev-role">7th Semester · BIT</p>
+        <div class="dev-info">
+          <p><strong>Institution</strong><br>Phoenix College of Management<br>Kathmandu, Nepal</p>
+          <p><strong>Technologies</strong><br>HTML5 · CSS3 · JavaScript<br>Leaflet.js · Wikipedia API<br>LocalStorage API</p>
+          <p><strong>Submitted</strong><br>March 2026</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="sec-head">
+    <span class="sec-tag">Get in Touch</span>
+    <h2>Plan Your Nepal Trip</h2>
+    <p>Fill the form and we will get back to you within 24 hours</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-form">
+      <div class="frow"><label>Your Name</label><input type="text" id="c-name" placeholder="e.g. Rijan Khatri" /></div>
+      <div class="frow"><label>Email Address</label><input type="email" id="c-email" placeholder="you@email.com" /></div>
+      <div class="frow"><label>Destination of Interest</label><select id="c-dest"><option value="">— Select —</option></select></div>
+      <div class="frow"><label>Your Message</label><textarea id="c-msg" rows="5" placeholder="Travel dates, group size, questions…"></textarea></div>
+      <button class="btn btn-green" onclick="submitForm()">Send Message ✈</button>
+      <p class="form-ok" id="form-ok">✅ Thank you! We will respond within 24 hours.</p>
+    </div>
+    <div class="contact-info">
+      <div class="ibox"><span>📍</span><div><strong>Address</strong><p>chabahil, Kathmandu<br>Bagmati Province, Nepal</p></div></div>
+      <div class="ibox"><span>📞</span><div><strong>Phone</strong><p>+9779827782888</p></div></div>
+      <div class="ibox"><span>✉️</span><div><strong>Email</strong><p>info@explorenepal.com.np</p></div></div>
+      <div class="ibox"><span>🕐</span><div><strong>Office Hours</strong><p>Sun–Fri: 9 AM – 6 PM</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="fbrand">
+      <span class="flogo">🏔️ ExploreNepal</span>
+      <p>Your complete digital guide to Nepal's natural wonders, cultural heritage and hidden gems.</p>
+    </div>
+    <div class="fcol"><h4>Explore</h4>
+      <a href="#destinations">Destinations</a>
+      <a href="#hotels">Hotels</a>
+      <a href="#restaurants">Restaurants</a>
+      <a href="#map-section">Map</a>
+      <a href="#planner">Trip Planner</a>
+    </div>
+    <div class="fcol"><h4>Info</h4>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About Project</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 ExploreNepal · Final Year Project · Phoenix College of Management, Kathmandu</p>
+    <p>Developed by <strong>Rijan Khatri</strong> · Bachelor of Information Technology, 7th Semester</p>
+  </div>
+</footer>
+
+
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="auth-overlay" onclick="closeAuthModal()"></div>
+<div class="auth-modal" id="auth-modal">
+  <button class="auth-close" onclick="closeAuthModal()">✕</button>
+
+  <!-- LOGIN FORM -->
+  <div id="auth-login-panel">
+    <div class="auth-logo">🏔️ ExploreNepal</div>
+    <h2 class="auth-title">Welcome Back</h2>
+    <p class="auth-sub">Sign in to save your trips and write reviews</p>
+    <div class="auth-field">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="you@email.com" />
+    </div>
+    <div class="auth-field">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="••••••••" />
+    </div>
+    <p class="auth-err" id="login-err"></p>
+    <button class="auth-btn" onclick="doLogin()">Sign In</button>
+    <p class="auth-switch">Don't have an account? <a href="#" onclick="switchToRegister()">Register</a></p>
+  </div>
+
+  <!-- REGISTER FORM -->
+  <div id="auth-register-panel" style="display:none;">
+    <div class="auth-logo">🏔️ ExploreNepal</div>
+    <h2 class="auth-title">Create Account</h2>
+    <p class="auth-sub">Join thousands of Nepal travellers</p>
+    <div class="auth-field">
+      <label>Full Name</label>
+      <input type="text" id="reg-name" placeholder="Rijan Khatri" />
+    </div>
+    <div class="auth-field">
+      <label>Email</label>
+      <input type="email" id="reg-email" placeholder="you@email.com" />
+    </div>
+    <div class="auth-field">
+      <label>Password</label>
+      <input type="password" id="reg-pass" placeholder="Min 6 characters" />
+    </div>
+    <div class="auth-field">
+      <label>Confirm Password</label>
+      <input type="password" id="reg-pass2" placeholder="Repeat password" />
+    </div>
+    <p class="auth-err" id="reg-err"></p>
+    <button class="auth-btn" onclick="doRegister()">Create Account</button>
+    <p class="auth-switch">Already have an account? <a href="#" onclick="switchToLogin()">Sign In</a></p>
+  </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="data.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
