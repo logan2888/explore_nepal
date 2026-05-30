@@ -1,4 +1,4 @@
-const API = 'http://localhost:3000/api';
+const API = 'https://explorenepal-backend.onrender.com/api';
 
 async function loadAllData() {
   const [destinations, hotels, restaurants] = await Promise.all([
