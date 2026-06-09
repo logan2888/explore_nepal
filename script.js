@@ -272,7 +272,8 @@ function buildHotelCards(list) {
           <span>💰 ${h.priceRange}</span>
         </div>
         <div class="card-rating">${starsHTML(h.rating)} ${h.rating} (${h.reviews} reviews)</div>
-        <button class="card-btn" onclick="openHotelDetail('${h.id}')">View Details →</button>
+       <button class="card-btn" onclick="openHotelDetail('${h.id}')">View Details →</button>
+<button class="card-btn" style="background:#d4a017;margin-left:8px" onclick="openBooking('${h.id}','${h.name}','hotel')">Book Now 🏨</button>
       </div>`;
     grid.appendChild(card);
   });
@@ -334,7 +335,8 @@ function buildRestoCards(list) {
           <span>💰 ${r.priceRange}</span>
         </div>
         <div class="card-rating">${starsHTML(r.rating)} ${r.rating} (${r.reviews} reviews)</div>
-        <button class="card-btn" onclick="openRestoDetail('${r.id}')">View Details →</button>
+       <button class="card-btn" onclick="openRestoDetail('${r.id}')">View Details →</button>
+<button class="card-btn" style="background:#d4a017;margin-left:8px" onclick="openBooking('${r.id}','${r.name}','restaurant')">Book Now 🍜</button>
       </div>`;
     grid.appendChild(card);
   });
@@ -1024,3 +1026,47 @@ document.addEventListener('keydown', function(e) {
 
 /* ── INIT ── */
 buildGallery(galleryItems.slice(0, INITIAL_COUNT));
+// ── BOOKING SYSTEM ──
+function openBooking(id, name, type) {
+  const modal = document.getElementById('booking-modal');
+  document.getElementById('booking-title').textContent = 'Book ' + name;
+  document.getElementById('booking-item-id').value = id;
+  document.getElementById('booking-item-name').value = name;
+  document.getElementById('booking-type').value = type;
+  modal.style.display = 'flex';
+}
+
+function closeBooking() {
+  document.getElementById('booking-modal').style.display = 'none';
+}
+
+async function submitBooking() {
+  const booking = {
+    type:     document.getElementById('booking-type').value,
+    itemId:   document.getElementById('booking-item-id').value,
+    itemName: document.getElementById('booking-item-name').value,
+    userName: document.getElementById('booking-name').value,
+    email:    document.getElementById('booking-email').value,
+    date:     document.getElementById('booking-date').value,
+    guests:   document.getElementById('booking-guests').value,
+    message:  document.getElementById('booking-message').value,
+  };
+
+  if (!booking.userName || !booking.email || !booking.date) {
+    alert('Please fill in all required fields!');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API}/bookings`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(booking)
+    });
+    const data = await res.json();
+    alert('✅ Booking confirmed for ' + booking.itemName + '!');
+    closeBooking();
+  } catch (err) {
+    alert('❌ Booking failed. Please try again.');
+  }
+}
