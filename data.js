@@ -279,7 +279,7 @@ let destinations = [
 ];
 
 // ── HOTELS ──────────────────────────────────────────────────
-javascript
+
 let hotels = [
   {
     id: "h1", name: "Hotel Yak & Yeti", type: "Luxury Hotel",
@@ -338,7 +338,7 @@ let hotels = [
 ];
 
 // ── RESTAURANTS ──────────────────────────────────────────────
-javascript
+
 let restaurants = [
   {
     id: "r1", name: "Bhojan Griha", cuisine: "Traditional Nepali",
