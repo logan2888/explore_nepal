@@ -11,13 +11,183 @@ async function loadAllData() {
 }
 
 async function initApp() {
-  const data = await loadAllData();
-  destinations = data.destinations;
-  hotels       = data.hotels;
-  restaurants  = data.restaurants;
-  buildDestCards(destinations);
-  buildHotelCards(hotels);
-  buildRestoCards(restaurants);
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
+}
+initApp();
+async function initApp() {
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
+}
+initApp();
+async function initApp() {
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
+}
+initApp();
+async function initApp() {
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
+}
+initApp();
+async function initApp() {
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
+}
+initApp();
+async function initApp() {
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
+}
+initApp();
+async function initApp() {
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
+}
+initApp();
+async function initApp() {
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
+}
+initApp();
+async function initApp() {
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
+}
+initApp();
+async function initApp() {
+  try {
+    const data = await loadAllData();
+    destinations = data.destinations;
+    hotels       = data.hotels;
+    restaurants  = data.restaurants;
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+    console.log('✅ Data loaded from backend!');
+  } catch (err) {
+    console.error('❌ Backend error, using local data:', err);
+    buildDestCards(destinations);
+    buildHotelCards(hotels);
+    buildRestoCards(restaurants);
+  }
 }
 initApp();
 
