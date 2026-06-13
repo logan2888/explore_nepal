@@ -4,7 +4,7 @@
 //  Updated: real, verified photo IDs for every entry
 // ============================================================
 
-javascript
+
 let destinations = [
   {
     id: "everest", name: "Mount Everest & Base Camp",
