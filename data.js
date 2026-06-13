@@ -4,7 +4,8 @@
 //  Updated: real, verified photo IDs for every entry
 // ============================================================
 
-const destinations = [
+javascript
+let destinations = [
   {
     id: "everest", name: "Mount Everest & Base Camp",
     province: "Province No. 1", category: "mountain",
@@ -278,7 +279,8 @@ const destinations = [
 ];
 
 // ── HOTELS ──────────────────────────────────────────────────
-const hotels = [
+javascript
+let hotels = [
   {
     id: "h1", name: "Hotel Yak & Yeti", type: "Luxury Hotel",
     location: "Durbar Marg, Kathmandu",
@@ -336,7 +338,8 @@ const hotels = [
 ];
 
 // ── RESTAURANTS ──────────────────────────────────────────────
-const restaurants = [
+javascript
+let restaurants = [
   {
     id: "r1", name: "Bhojan Griha", cuisine: "Traditional Nepali",
     location: "Dillibazar, Kathmandu", priceRange: "Mid-range",
