@@ -7,7 +7,6 @@ async function loadAllData() {
     fetch(`${API}/restaurants`).then(r => r.json()),
   ]);
   return { destinations, hotels, restaurants };
-
 }
 
 async function initApp() {
@@ -19,178 +18,14 @@ async function initApp() {
     buildDestCards(destinations);
     buildHotelCards(hotels);
     buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
   } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
+    console.error('❌ Error:', err);
     buildDestCards(destinations);
     buildHotelCards(hotels);
     buildRestoCards(restaurants);
   }
 }
 initApp();
-async function initApp() {
-  try {
-    const data = await loadAllData();
-    destinations = data.destinations;
-    hotels       = data.hotels;
-    restaurants  = data.restaurants;
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
-  } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-  }
-}
-initApp();
-async function initApp() {
-  try {
-    const data = await loadAllData();
-    destinations = data.destinations;
-    hotels       = data.hotels;
-    restaurants  = data.restaurants;
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
-  } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-  }
-}
-initApp();
-async function initApp() {
-  try {
-    const data = await loadAllData();
-    destinations = data.destinations;
-    hotels       = data.hotels;
-    restaurants  = data.restaurants;
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
-  } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-  }
-}
-initApp();
-async function initApp() {
-  try {
-    const data = await loadAllData();
-    destinations = data.destinations;
-    hotels       = data.hotels;
-    restaurants  = data.restaurants;
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
-  } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-  }
-}
-initApp();
-async function initApp() {
-  try {
-    const data = await loadAllData();
-    destinations = data.destinations;
-    hotels       = data.hotels;
-    restaurants  = data.restaurants;
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
-  } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-  }
-}
-initApp();
-async function initApp() {
-  try {
-    const data = await loadAllData();
-    destinations = data.destinations;
-    hotels       = data.hotels;
-    restaurants  = data.restaurants;
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
-  } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-  }
-}
-initApp();
-async function initApp() {
-  try {
-    const data = await loadAllData();
-    destinations = data.destinations;
-    hotels       = data.hotels;
-    restaurants  = data.restaurants;
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
-  } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-  }
-}
-initApp();
-async function initApp() {
-  try {
-    const data = await loadAllData();
-    destinations = data.destinations;
-    hotels       = data.hotels;
-    restaurants  = data.restaurants;
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
-  } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-  }
-}
-initApp();
-async function initApp() {
-  try {
-    const data = await loadAllData();
-    destinations = data.destinations;
-    hotels       = data.hotels;
-    restaurants  = data.restaurants;
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-    console.log('✅ Data loaded from backend!');
-  } catch (err) {
-    console.error('❌ Backend error, using local data:', err);
-    buildDestCards(destinations);
-    buildHotelCards(hotels);
-    buildRestoCards(restaurants);
-  }
-}
-initApp();
-
 
 // ── FIREBASE SETUP ──────────────────────────────────────────
 const firebaseConfig = {
