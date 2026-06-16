@@ -1,12 +1,13 @@
+
 const API = 'https://explorenepal-backend.onrender.com/api';
 
 async function loadAllData() {
-  const [destinations, hotels, restaurants] = await Promise.all([
+  const [destData, hotelData, restoData] = await Promise.all([
     fetch(`${API}/destinations`).then(r => r.json()),
     fetch(`${API}/hotels`).then(r => r.json()),
     fetch(`${API}/restaurants`).then(r => r.json()),
   ]);
-  return { destinations, hotels, restaurants };
+  return { destinations: destData, hotels: hotelData, restaurants: restoData };
 }
 
 async function initApp() {
