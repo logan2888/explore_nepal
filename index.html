@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ExploreNepal — Tourism Guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -74,7 +74,7 @@
 
 <!-- SEARCH -->
 <section class="section" id="search-section">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="sec-tag">Find a Place</span>
     <h2>Search Destinations</h2>
     <p>Type any name, category or province to find it instantly</p>
@@ -89,7 +89,7 @@
 
 <!-- DESTINATIONS -->
 <section class="section sec-alt" id="destinations">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="sec-tag">Top Places</span>
     <h2>Must-Visit Destinations</h2>
     <p>From Himalayan peaks to ancient valley temples</p>
@@ -107,7 +107,7 @@
 
 <!-- HOTELS -->
 <section class="section" id="hotels">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="sec-tag">Stay</span>
     <h2>Hotels &amp; Accommodation</h2>
     <p>From luxury resorts to cosy Himalayan guesthouses</p>
@@ -125,7 +125,7 @@
 
 <!-- RESTAURANTS -->
 <section class="section sec-alt" id="restaurants">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="sec-tag">Eat</span>
     <h2>Restaurants &amp; Food Guide</h2>
     <p>Savour dal bhat, momos and more at Nepal's best eateries</p>
@@ -142,7 +142,7 @@
 
 <!-- MAP -->
 <section class="section" id="map-section">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="sec-tag">Explore</span>
     <h2>Interactive Map of Nepal</h2>
     <p>Click any marker to learn about that destination</p>
@@ -153,17 +153,17 @@
     <span><i class="dot" style="background:#0066bb"></i> Lakes</span>
     <span><i class="dot" style="background:#2d6a1f"></i> Nature</span>
   </div>
-  <div id="the-map"></div>
+  <div id="the-map" class="reveal"></div>
 </section>
 
 <!-- TRIP PLANNER -->
 <section class="section sec-alt" id="planner">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="sec-tag">Plan</span>
     <h2>Trip Planner</h2>
     <p>Build your personalised Nepal itinerary day by day</p>
   </div>
-  <div class="planner-wrap">
+  <div class="planner-wrap reveal">
     <div class="planner-left">
       <h3>Add a Destination</h3>
       <select id="pick-dest"><option value="">— Choose destination —</option></select>
@@ -183,7 +183,7 @@
 
 <!-- GALLERY -->
 <section class="section" id="gallery">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="sec-tag">Gallery</span>
     <h2>Nepal in Pictures</h2>
     <p>50+ beautiful moments from across the Himalayas — click any photo to enlarge</p>
@@ -383,7 +383,7 @@
 
 <!-- ABOUT -->
 <section class="section sec-alt" id="about">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="sec-tag">About This Project</span>
     <h2>About ExploreNepal</h2>
     <p>Final Year Project — Phoenix College of Management, Kathmandu</p>
@@ -421,7 +421,7 @@
 
 <!-- CONTACT -->
 <section class="section" id="contact">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <span class="sec-tag">Get in Touch</span>
     <h2>Plan Your Nepal Trip</h2>
     <p>Fill the form and we will get back to you within 24 hours</p>
@@ -430,7 +430,6 @@
     <div class="contact-form">
       <div class="frow"><label>Your Name</label><input type="text" id="c-name" placeholder="e.g. Rijan Khatri" /></div>
       <div class="frow"><label>Email Address</label><input type="email" id="c-email" placeholder="you@email.com" /></div>
-      <div class="frow"><label>Destination of Interest</label><select id="c-dest"><option value="">— Select —</option></select></div>
       <div class="frow"><label>Your Message</label><textarea id="c-msg" rows="5" placeholder="Travel dates, group size, questions…"></textarea></div>
       <button class="btn btn-green" onclick="submitForm()">Send Message ✈</button>
       <p class="form-ok" id="form-ok">✅ Thank you! We will respond within 24 hours.</p>
@@ -526,6 +525,32 @@
 <script src="data.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="script.js"></script>
+<script>
+// Scroll-reveal: purely additive, does not touch any existing app logic/IDs.
+(function () {
+  function initReveal() {
+    var targets = document.querySelectorAll('.reveal, .reveal-stagger');
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(function (el) { el.classList.add('in-view'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(function (el) { io.observe(el); });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else {
+    initReveal();
+  }
+})();
+</script>
 <!-- BOOKING MODAL -->
 <div id="booking-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center;">
   <div style="background:white;padding:30px;border-radius:12px;width:90%;max-width:500px;position:relative;">

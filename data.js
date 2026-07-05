@@ -189,7 +189,7 @@ let destinations = [
   {
     id: "gosainkunda", name: "Gosainkunda Lake",
     province: "Bagmati Province", category: "lake",
-   image: "https://images.unsplash.com/photo-1439853949212-36589f9027c4?w=800image:"https://images.unsplash.com/photo-1585016495481-9a7e5073f994?w=800&q=80"q=80",
+    image: "https://images.unsplash.com/photo-1439853949212-36589f9027c4?w=800&q=80",
     description: "A sacred alpine lake at 4,380 m believed to have been created when Lord Shiva struck the Himalayas with his trident. Every year during Janai Purnima, tens of thousands of pilgrims trek to bathe in its icy waters. The lake freezes from December to March.",
     latitude: 28.0833, longitude: 85.6167,
     bestSeason: "May–Jun, Sep–Oct", entryFee: "Langtang permit",

@@ -529,18 +529,14 @@ function submitForm() {
   document.getElementById('c-name').value  = '';
   document.getElementById('c-email').value = '';
   document.getElementById('c-msg').value   = '';
-  document.getElementById('c-dest').value  = '';
   setTimeout(function () { ok.style.display = 'none'; }, 5000);
 }
 
 /* ── 13. DROPDOWNS ── */
-const pickSel    = document.getElementById('pick-dest');
-const contactSel = document.getElementById('c-dest');
+const pickSel = document.getElementById('pick-dest');
 destinations.forEach(function (d) {
-  [pickSel, contactSel].forEach(function (sel) {
-    const o = document.createElement('option');
-    o.value = d.id; o.textContent = d.name; sel.appendChild(o);
-  });
+  const o = document.createElement('option');
+  o.value = d.id; o.textContent = d.name; pickSel.appendChild(o);
 });
 
 /* ── 14. WIKIPEDIA IMAGE UPGRADE ──
@@ -923,53 +919,92 @@ function buildGallery(items, append) {
 /* ── Fetch real Wikipedia thumbnails in batches of 10 ── */
 function fetchWikiImages(items, startIdx) {
   var BATCH = 10;
+  var topicFallbacks = [
+    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=80',
+    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80',
+    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=80',
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80',
+    'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=700&q=80',
+  ];
+
+  function applyImage(cell, imgSrc) {
+    var img = cell.querySelector('img');
+    if (!img) return;
+    img.src = imgSrc;
+    img.onload = function() { img.classList.add('loaded'); cell.classList.remove('gal-loading'); };
+    img.onerror = function() {
+      var n = Math.floor(Math.random() * topicFallbacks.length);
+      img.src = topicFallbacks[n];
+      img.onload = function() { img.classList.add('loaded'); cell.classList.remove('gal-loading'); };
+    };
+  }
+
   for (var i = 0; i < items.length; i += BATCH) {
     (function(batch, offset) {
       var titles = batch.map(function(it) { return encodeURIComponent(it.wiki); }).join('|');
       var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageimages'
-              + '&piprop=thumbnail&pithumbsize=700&pilimit=50'
+              + '&piprop=thumbnail&pithumbsize=700&pilimit=50&redirects=1'
               + '&format=json&origin=*&titles=' + titles;
 
       fetch(url)
         .then(function(r) { return r.json(); })
         .then(function(data) {
-          if (!data.query) return;
-          Object.values(data.query.pages).forEach(function(page) {
-            if (!page.thumbnail) return;
-            var imgSrc = page.thumbnail.source;
-            var wikiKey = page.title.replace(/ /g, '_');
+          if (!data.query) throw new Error('no query in response');
 
-            // Find matching grid item by data-wiki attribute
+          // Map the *final* (post-redirect/normalized) title back to the
+          // *originally requested* title, so we can match against data-wiki.
+          var finalToOriginal = {};
+          batch.forEach(function(it) { finalToOriginal[it.wiki.replace(/ /g, '_').toLowerCase()] = it.wiki; });
+          (data.query.normalized || []).forEach(function(n) {
+            finalToOriginal[n.to.replace(/ /g, '_').toLowerCase()] = n.from;
+          });
+          (data.query.redirects || []).forEach(function(r) {
+            var origFrom = finalToOriginal[r.from.replace(/ /g, '_').toLowerCase()] || r.from;
+            finalToOriginal[r.to.replace(/ /g, '_').toLowerCase()] = origFrom;
+          });
+
+          var handledWikis = {};
+
+          Object.values(data.query.pages).forEach(function(page) {
+            var finalKey = page.title.replace(/ /g, '_').toLowerCase();
+            var originalWiki = finalToOriginal[finalKey] || page.title;
+            if (!page.thumbnail) return; // no image on this Wikipedia page — leave unhandled so the fallback pass below catches it
+
+            handledWikis[originalWiki.replace(/ /g, '_').toLowerCase()] = true;
+            var imgSrc = page.thumbnail.source;
             var cells = document.querySelectorAll('.gal-item[data-wiki]');
             cells.forEach(function(cell) {
-              var cellWiki = cell.getAttribute('data-wiki').replace(/ /g, '_');
-              if (cellWiki.toLowerCase() === wikiKey.toLowerCase()) {
-                var img = cell.querySelector('img');
-                if (img) {
-                  img.src = imgSrc;
-                  img.onload = function() {
-                    img.classList.add('loaded');
-                    cell.classList.remove('gal-loading');
-                  };
-                  img.onerror = function() {
-                    // If Wikipedia thumb fails, use a reliable landscape from Unsplash by topic
-                    var fallbacks = [
-                      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=80',
-                      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80',
-                      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=80',
-                      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80',
-                      'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=700&q=80',
-                    ];
-                    var n = Math.floor(Math.random() * fallbacks.length);
-                    img.src = fallbacks[n];
-                    img.onload = function() { img.classList.add('loaded'); cell.classList.remove('gal-loading'); };
-                  };
-                }
+              var cellWiki = cell.getAttribute('data-wiki').replace(/ /g, '_').toLowerCase();
+              if (cellWiki === originalWiki.replace(/ /g, '_').toLowerCase()) {
+                applyImage(cell, imgSrc);
               }
             });
           });
+
+          // Any requested title that genuinely has no Wikipedia photo (rare
+          // village/topic pages) — don't leave it stuck on the shimmer forever.
+          batch.forEach(function(it) {
+            var key = it.wiki.replace(/ /g, '_').toLowerCase();
+            if (!handledWikis[key]) {
+              var cells = document.querySelectorAll('.gal-item[data-wiki="' + it.wiki + '"]');
+              cells.forEach(function(cell) {
+                var n = Math.floor(Math.random() * topicFallbacks.length);
+                applyImage(cell, topicFallbacks[n]);
+              });
+            }
+          });
         })
-        .catch(function(err) { console.warn('Gallery fetch error:', err); });
+        .catch(function(err) {
+          console.warn('Gallery fetch error:', err);
+          // Network/API failure for this whole batch — fall back so items don't hang forever.
+          batch.forEach(function(it) {
+            var cells = document.querySelectorAll('.gal-item[data-wiki="' + it.wiki + '"]');
+            cells.forEach(function(cell) {
+              var n = Math.floor(Math.random() * topicFallbacks.length);
+              applyImage(cell, topicFallbacks[n]);
+            });
+          });
+        });
     })(items.slice(i, i + BATCH), i);
   }
 }
