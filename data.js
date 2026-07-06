@@ -334,6 +334,42 @@ let hotels = [
     image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80",
     amenities: ["Heritage Building", "Rooftop Terrace", "Free WiFi", "Breakfast", "City Views"],
     phone: "+977-1-6610488", rating: 4.6, reviews: 290
+  },
+  {
+    id: "h7", name: "Club Himalaya Nagarkot", type: "Mountain Resort",
+    location: "Nagarkot, Bhaktapur",
+    description: "Perched on the Nagarkot ridge at 2,175m, this resort is famous for uninterrupted sunrise views over Everest, Langtang and the Annapurna range. Rooms open onto private balconies facing the Himalayas, and the indoor heated pool is a welcome comfort on cold mountain evenings.",
+    priceRange: "Mid-range (USD 70–130/night)",
+    image: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&q=80",
+    amenities: ["Mountain View", "Indoor Pool", "Free WiFi", "Restaurant", "Bar", "Spa", "Sunrise Deck"],
+    phone: "+977-1-6680080", rating: 4.6, reviews: 380
+  },
+  {
+    id: "h8", name: "Bandipur Mountain Lodge", type: "Heritage Guesthouse",
+    location: "Bandipur, Tanahun",
+    description: "A restored Newari-style guesthouse in the car-free hilltop town of Bandipur, with carved wooden balconies overlooking terraced valleys and a distant Himalayan skyline. Evenings here mean lantern-lit cobblestone streets and home-cooked Nepali meals on the rooftop terrace.",
+    priceRange: "Budget (USD 25–50/night)",
+    image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&q=80",
+    amenities: ["Valley View", "Rooftop Terrace", "Free WiFi", "Breakfast", "Heritage Building"],
+    phone: "+977-9846123456", rating: 4.7, reviews: 260
+  },
+  {
+    id: "h9", name: "Dwarika's Heritage Hotel", type: "Luxury Heritage Hotel",
+    location: "Battisputali, Kathmandu",
+    description: "A living museum of a hotel, built entirely from rescued centuries-old carved wood and brick from Kathmandu Valley's temples and palaces. Every corner showcases traditional Newari craftsmanship, paired with five-star service, a spa and some of the city's finest dining.",
+    priceRange: "Luxury (USD 200–400/night)",
+    image: "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?w=800&q=80",
+    amenities: ["Heritage Architecture", "Spa", "Free WiFi", "Fine Dining", "Pool", "Airport Shuttle"],
+    phone: "+977-1-4479488", rating: 4.9, reviews: 610
+  },
+  {
+    id: "h10", name: "Lumbini Buddha Garden Resort", type: "Resort",
+    location: "Lumbini, Rupandehi",
+    description: "A peaceful resort near the birthplace of Buddha, designed around meditation gardens and lotus ponds. Simple, comfortable rooms and a calm, spiritual atmosphere make it a favourite for pilgrims and travellers seeking quiet reflection near the Sacred Garden.",
+    priceRange: "Mid-range (USD 45–85/night)",
+    image: "https://images.unsplash.com/photo-1583953458882-302655b5c376?w=800&q=80",
+    amenities: ["Meditation Garden", "Free WiFi", "Restaurant", "Bicycle Rental", "Peaceful Setting"],
+    phone: "+977-71-580220", rating: 4.5, reviews: 190
   }
 ];
 
@@ -387,5 +423,37 @@ let restaurants = [
     specialties: ["Steamed Buff Momo", "Fried Momo", "Jhol Momo", "Chowmein", "Samosa"],
     image: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=800&q=80",
     phone: "+977-9841111222", rating: 4.6, reviews: 1200
+  },
+  {
+    id: "r7", name: "Newa Lahana", cuisine: "Traditional Newari",
+    location: "Bandipur Bazaar, Tanahun", priceRange: "Mid-range",
+    description: "Set inside a 200-year-old Newari house with exposed wooden beams and stone walls, this restaurant serves an authentic Newari feast — bara, chatamari and slow-cooked buff choila — in a warm, lantern-lit dining room overlooking the hilltop bazaar.",
+    specialties: ["Chatamari", "Bara", "Buff Choila", "Aila", "Yomari"],
+    image: "https://images.unsplash.com/photo-1744561249162-c597c1670032?w=800&q=80",
+    phone: "+977-9806112233", rating: 4.7, reviews: 340
+  },
+  {
+    id: "r8", name: "Sunrise View Restaurant", cuisine: "Nepali & Continental",
+    location: "Nagarkot, Bhaktapur", priceRange: "Mid-range",
+    description: "A large-windowed dining room built specifically to catch the Himalayan sunrise over breakfast. The kitchen serves hearty Nepali thalis alongside continental comfort food, best enjoyed with a hot cup of milk tea as the mountains turn gold.",
+    specialties: ["Nepali Thali", "Pancakes", "Milk Tea", "Grilled Trout", "Vegetable Soup"],
+    image: "https://images.unsplash.com/photo-1758243488328-148e39e5e6b1?w=800&q=80",
+    phone: "+977-1-6680099", rating: 4.5, reviews: 275
+  },
+  {
+    id: "r9", name: "Utse Restaurant", cuisine: "Tibetan & Nepali",
+    location: "Thamel, Kathmandu", priceRange: "Budget",
+    description: "A long-standing Thamel favourite serving hearty Tibetan and Nepali comfort food in a simple wood-panelled dining room. The thukpa, momos and butter tea are staples for trekkers fueling up before heading into the mountains.",
+    specialties: ["Thukpa", "Steamed Momo", "Butter Tea", "Tsampa", "Gyakok Hot Pot"],
+    image: "https://images.unsplash.com/photo-1621293954908-907159247fc8?w=800&q=80",
+    phone: "+977-1-4226946", rating: 4.5, reviews: 590
+  },
+  {
+    id: "r10", name: "Fewa Lakeview Cafe", cuisine: "Nepali & Continental",
+    location: "Lakeside, Pokhara", priceRange: "Budget",
+    description: "A relaxed open-air cafe right on the edge of Phewa Lake, popular for slow breakfasts and sunset drinks with paragliders drifting overhead. The menu mixes Nepali staples with pizza, pasta and fresh lake-view coffee.",
+    specialties: ["Fish Thali", "Wood-fired Pizza", "Lemon Ginger Tea", "Chowmein", "Buff Sekuwa"],
+    image: "https://images.unsplash.com/photo-1611048267451-e6ed903d4a38?w=800&q=80",
+    phone: "+977-61-463321", rating: 4.6, reviews: 460
   }
 ];

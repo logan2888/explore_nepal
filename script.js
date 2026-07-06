@@ -871,13 +871,13 @@ const galleryItems = [
   // Culture
   { cat:'culture', wiki:'Indra_Jatra',              cap:'Indra Jatra Festival, Kathmandu' },
   { cat:'culture', wiki:'Kumari_(goddess)',          cap:'Living Goddess Kumari, Kathmandu' },
-  { cat:'culture', wiki:'Dal_bhat',                 cap:'Dal Bhat — Nepal\'s National Dish' },
+  { cat:'culture', wiki:'Dal_bhat',                 cap:'Dal Bhat — Nepal\'s National Dish', img:'https://images.unsplash.com/photo-1467879885238-77db697bfad8?w=700&q=80' },
   { cat:'culture', wiki:'Momo_(food)',              cap:'Steamed Momos — Nepali Dumplings' },
   { cat:'culture', wiki:'Prayer_flags',             cap:'Prayer Flags in the Himalayas' },
   { cat:'culture', wiki:'Tharu_people',             cap:'Tharu Cultural Dance, Chitwan' },
   { cat:'culture', wiki:'Tihar_(festival)',         cap:'Tihar Festival of Lights' },
   { cat:'culture', wiki:'Dashain',                  cap:'Dashain — Nepal\'s Biggest Festival' },
-  { cat:'culture', wiki:'Mithila_art',              cap:'Mithila Folk Art, Janakpur' },
+  { cat:'culture', wiki:'Mithila_art',              cap:'Mithila Folk Art, Janakpur', img:'https://images.unsplash.com/photo-1719498481882-0ee699635b4e?w=700&q=80' },
   { cat:'culture', wiki:'Sherpa_people',            cap:'Sherpa People, Khumbu Valley' },
 ];
 
@@ -901,8 +901,15 @@ function buildGallery(items, append) {
 
     var img = document.createElement('img');
     img.alt = item.cap;
-    // placeholder shimmer while loading
-    img.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+
+    if (item.img) {
+      // Verified direct photo — bypass Wikipedia lookup entirely for this item.
+      img.src = item.img;
+      img.onload = function() { img.classList.add('loaded'); div.classList.remove('gal-loading'); };
+    } else {
+      // placeholder shimmer while loading via Wikipedia
+      img.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+    }
 
     var span = document.createElement('span');
     span.textContent = item.cap;
@@ -913,28 +920,39 @@ function buildGallery(items, append) {
   });
 
   applyGalleryFilter(currentGalFilter);
-  fetchWikiImages(items, append ? galleryItems.indexOf(items[0]) : 0);
+  var needsFetch = items.filter(function(it) { return !it.img; });
+  fetchWikiImages(needsFetch, append ? galleryItems.indexOf(items[0]) : 0);
 }
 
 /* ── Fetch real Wikipedia thumbnails in batches of 10 ── */
 function fetchWikiImages(items, startIdx) {
   var BATCH = 10;
-  var topicFallbacks = [
-    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=80',
-    'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80',
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=80',
-    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80',
-    'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=700&q=80',
-  ];
+  // Fallbacks grouped by category so a food/culture item never gets a random mountain photo.
+  // These are the same photos already used successfully elsewhere in the app (data.js / seed.js).
+  var fallbacksByCat = {
+    mountain: ['https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=80',
+               'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80'],
+    heritage: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80',
+               'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=700&q=80'],
+    lake:     ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=80',
+               'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=700&q=80'],
+    nature:   ['https://images.unsplash.com/photo-1571150825816-3b9c10640445?w=700&q=80',
+               'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=700&q=80'],
+    culture:  ['https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80', // Bhojan Griha (traditional Nepali food/decor)
+               'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=700&q=80'], // Momos & More (street food)
+  };
+  function fallbackFor(cat) {
+    var pool = fallbacksByCat[cat] || fallbacksByCat.heritage;
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
 
-  function applyImage(cell, imgSrc) {
+  function applyImage(cell, imgSrc, cat) {
     var img = cell.querySelector('img');
     if (!img) return;
     img.src = imgSrc;
     img.onload = function() { img.classList.add('loaded'); cell.classList.remove('gal-loading'); };
     img.onerror = function() {
-      var n = Math.floor(Math.random() * topicFallbacks.length);
-      img.src = topicFallbacks[n];
+      img.src = fallbackFor(cat);
       img.onload = function() { img.classList.add('loaded'); cell.classList.remove('gal-loading'); };
     };
   }
@@ -945,6 +963,10 @@ function fetchWikiImages(items, startIdx) {
       var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageimages'
               + '&piprop=thumbnail&pithumbsize=700&pilimit=50&redirects=1'
               + '&format=json&origin=*&titles=' + titles;
+
+      // Map data-wiki value -> category, so fallbacks can be matched correctly.
+      var catByWiki = {};
+      batch.forEach(function(it) { catByWiki[it.wiki] = it.cat; });
 
       fetch(url)
         .then(function(r) { return r.json(); })
@@ -972,11 +994,12 @@ function fetchWikiImages(items, startIdx) {
 
             handledWikis[originalWiki.replace(/ /g, '_').toLowerCase()] = true;
             var imgSrc = page.thumbnail.source;
+            var cat = catByWiki[originalWiki] || 'heritage';
             var cells = document.querySelectorAll('.gal-item[data-wiki]');
             cells.forEach(function(cell) {
               var cellWiki = cell.getAttribute('data-wiki').replace(/ /g, '_').toLowerCase();
               if (cellWiki === originalWiki.replace(/ /g, '_').toLowerCase()) {
-                applyImage(cell, imgSrc);
+                applyImage(cell, imgSrc, cat);
               }
             });
           });
@@ -988,8 +1011,7 @@ function fetchWikiImages(items, startIdx) {
             if (!handledWikis[key]) {
               var cells = document.querySelectorAll('.gal-item[data-wiki="' + it.wiki + '"]');
               cells.forEach(function(cell) {
-                var n = Math.floor(Math.random() * topicFallbacks.length);
-                applyImage(cell, topicFallbacks[n]);
+                applyImage(cell, fallbackFor(it.cat), it.cat);
               });
             }
           });
@@ -1000,8 +1022,7 @@ function fetchWikiImages(items, startIdx) {
           batch.forEach(function(it) {
             var cells = document.querySelectorAll('.gal-item[data-wiki="' + it.wiki + '"]');
             cells.forEach(function(cell) {
-              var n = Math.floor(Math.random() * topicFallbacks.length);
-              applyImage(cell, topicFallbacks[n]);
+              applyImage(cell, fallbackFor(it.cat), it.cat);
             });
           });
         });

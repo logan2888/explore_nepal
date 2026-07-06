@@ -43,7 +43,11 @@ const hotels = [
   { id:"h3", name:"Namche Green Lodge", type:"Guesthouse", location:"Namche Bazaar, Solukhumbu", description:"A welcoming family-run guesthouse in Namche Bazaar with warm rooms and authentic Sherpa food.", priceRange:"Budget (USD 15–30/night)", image:"https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80", rating:4.5 },
   { id:"h4", name:"Chitwan Jungle Lodge", type:"Eco Lodge", location:"Sauraha, Chitwan", description:"An eco-friendly jungle lodge on the edge of Chitwan National Park built with local materials.", priceRange:"Mid-range (USD 50–90/night)", image:"https://images.unsplash.com/photo-1587381420270-3e1a5b9e6904?w=800&q=80", rating:4.6 },
   { id:"h5", name:"Pokhara Grande Hotel", type:"Luxury Hotel", location:"Baidam, Lakeside Pokhara", description:"Pokhara's premier hotel with panoramic rooftop views of the Annapurna range and an infinity pool.", priceRange:"Luxury (USD 100–200/night)", image:"https://images.unsplash.com/photo-1455587734955-081b22074882?w=800&q=80", rating:4.7 },
-  { id:"h6", name:"Bhaktapur Heritage Guesthouse", type:"Guesthouse", location:"Bhaktapur Old City", description:"A charming traditional Newari guesthouse just steps from Durbar Square with rooftop Himalayan views.", priceRange:"Budget (USD 20–45/night)", image:"https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80", rating:4.6 }
+  { id:"h6", name:"Bhaktapur Heritage Guesthouse", type:"Guesthouse", location:"Bhaktapur Old City", description:"A charming traditional Newari guesthouse just steps from Durbar Square with rooftop Himalayan views.", priceRange:"Budget (USD 20–45/night)", image:"https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80", rating:4.6 },
+  { id:"h7", name:"Club Himalaya Nagarkot", type:"Mountain Resort", location:"Nagarkot, Bhaktapur", description:"Perched on the Nagarkot ridge with uninterrupted sunrise views over Everest, Langtang and the Annapurna range.", priceRange:"Mid-range (USD 70–130/night)", image:"https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&q=80", rating:4.6 },
+  { id:"h8", name:"Bandipur Mountain Lodge", type:"Heritage Guesthouse", location:"Bandipur, Tanahun", description:"A restored Newari-style guesthouse in the car-free hilltop town of Bandipur overlooking terraced valleys.", priceRange:"Budget (USD 25–50/night)", image:"https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&q=80", rating:4.7 },
+  { id:"h9", name:"Dwarika's Heritage Hotel", type:"Luxury Heritage Hotel", location:"Battisputali, Kathmandu", description:"A living museum of a hotel built from rescued centuries-old carved wood and brick from the Kathmandu Valley.", priceRange:"Luxury (USD 200–400/night)", image:"https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?w=800&q=80", rating:4.9 },
+  { id:"h10", name:"Lumbini Buddha Garden Resort", type:"Resort", location:"Lumbini, Rupandehi", description:"A peaceful resort near the birthplace of Buddha, designed around meditation gardens and lotus ponds.", priceRange:"Mid-range (USD 45–85/night)", image:"https://images.unsplash.com/photo-1583953458882-302655b5c376?w=800&q=80", rating:4.5 }
 ];
 
 const restaurants = [
@@ -52,7 +56,11 @@ const restaurants = [
   { id:"r3", name:"OR2K Restaurant", cuisine:"Middle Eastern & Vegetarian", location:"Thamel, Kathmandu", priceRange:"Mid-range", description:"A Thamel institution serving healthy Middle Eastern and vegetarian food in a colourful cushioned lounge.", image:"https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&q=80", rating:4.6 },
   { id:"r4", name:"Thakali Kitchen", cuisine:"Thakali (Mustang-style)", location:"New Road, Kathmandu", priceRange:"Budget", description:"A local favourite serving authentic Thakali cuisine with the best dal bhat in Kathmandu.", image:"https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80", rating:4.7 },
   { id:"r5", name:"Krishnarpan", cuisine:"Royal Nepali Fine Dining", location:"Dwarika's Hotel, Battisputali", priceRange:"Luxury", description:"Nepal's only true fine-dining Nepali restaurant with a ceremonial multi-course meal of up to 22 dishes.", image:"https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80", rating:4.9 },
-  { id:"r6", name:"Momos & More", cuisine:"Nepali Street Food", location:"Ason Bazaar, Kathmandu", priceRange:"Budget", description:"A tiny beloved street-food stall serving Kathmandu's most popular momos since 1985.", image:"https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=800&q=80", rating:4.6 }
+  { id:"r6", name:"Momos & More", cuisine:"Nepali Street Food", location:"Ason Bazaar, Kathmandu", priceRange:"Budget", description:"A tiny beloved street-food stall serving Kathmandu's most popular momos since 1985.", image:"https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=800&q=80", rating:4.6 },
+  { id:"r7", name:"Newa Lahana", cuisine:"Traditional Newari", location:"Bandipur Bazaar, Tanahun", priceRange:"Mid-range", description:"Set inside a 200-year-old Newari house, serving an authentic Newari feast of bara, chatamari and buff choila.", image:"https://images.unsplash.com/photo-1744561249162-c597c1670032?w=800&q=80", rating:4.7 },
+  { id:"r8", name:"Sunrise View Restaurant", cuisine:"Nepali & Continental", location:"Nagarkot, Bhaktapur", priceRange:"Mid-range", description:"A large-windowed dining room built to catch the Himalayan sunrise, serving hearty Nepali and continental food.", image:"https://images.unsplash.com/photo-1758243488328-148e39e5e6b1?w=800&q=80", rating:4.5 },
+  { id:"r9", name:"Utse Restaurant", cuisine:"Tibetan & Nepali", location:"Thamel, Kathmandu", priceRange:"Budget", description:"A long-standing Thamel favourite serving hearty Tibetan and Nepali comfort food like thukpa and momos.", image:"https://images.unsplash.com/photo-1621293954908-907159247fc8?w=800&q=80", rating:4.5 },
+  { id:"r10", name:"Fewa Lakeview Cafe", cuisine:"Nepali & Continental", location:"Lakeside, Pokhara", priceRange:"Budget", description:"A relaxed open-air cafe on the edge of Phewa Lake, popular for slow breakfasts and sunset drinks.", image:"https://images.unsplash.com/photo-1611048267451-e6ed903d4a38?w=800&q=80", rating:4.6 }
 ];
 
 mongoose.connect(process.env.MONGO_URI).then(async () => {
@@ -67,10 +75,10 @@ mongoose.connect(process.env.MONGO_URI).then(async () => {
   console.log('✅ 32 Destinations imported!');
 
   await Hotel.insertMany(hotels);
-  console.log('✅ 6 Hotels imported!');
+  console.log('✅ 10 Hotels imported!');
 
   await Restaurant.insertMany(restaurants);
-  console.log('✅ 6 Restaurants imported!');
+  console.log('✅ 10 Restaurants imported!');
 
   console.log('🎉 All data imported successfully!');
   process.exit();

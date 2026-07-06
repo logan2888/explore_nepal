@@ -13,7 +13,28 @@
 
 <!-- NAV -->
 <nav class="navbar" id="navbar">
-  <a href="#home" class="nav-logo">🏔️ ExploreNepal</a>
+  <a href="#home" class="nav-logo">
+    <svg class="logo-mark" width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="logoSun" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d4793f"/>
+          <stop offset="100%" stop-color="#a34f1f"/>
+        </linearGradient>
+        <linearGradient id="logoBack" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5c8a6a"/>
+          <stop offset="100%" stop-color="#3c5f47"/>
+        </linearGradient>
+        <linearGradient id="logoFront" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#456b51"/>
+          <stop offset="100%" stop-color="#2c4a37"/>
+        </linearGradient>
+      </defs>
+      <circle cx="33" cy="13" r="6" fill="url(#logoSun)"/>
+      <path d="M4 36L16 15L22 24L27 17L38 36H4Z" fill="url(#logoBack)"/>
+      <path d="M22 24L27 17L44 36H24L22 24Z" fill="url(#logoFront)"/>
+    </svg>
+    ExploreNepal
+  </a>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#search-section">Search</a></li>
@@ -429,7 +450,7 @@
     <div class="contact-form">
       <div class="frow"><label>Your Name</label><input type="text" id="c-name" placeholder="e.g. Rijan Khatri" /></div>
       <div class="frow"><label>Email Address</label><input type="email" id="c-email" placeholder="you@email.com" /></div>
-      <div class="frow"><label>Your Message</label><textarea id="c-msg" rows="5" placeholder="write down your thoughts or questions…"></textarea></div>
+      <div class="frow"><label>Your Message</label><textarea id="c-msg" rows="5" placeholder="write down your thought or questions..."></textarea></div>
       <button class="btn btn-green" onclick="submitForm()">Send Message ✈</button>
       <p class="form-ok" id="form-ok">✅ Thank you! We will respond within 24 hours.</p>
     </div>
@@ -446,7 +467,28 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="fbrand">
-      <span class="flogo">🏔️ ExploreNepal</span>
+      <span class="flogo">
+        <svg class="logo-mark" width="26" height="26" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoSunF" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d4793f"/>
+              <stop offset="100%" stop-color="#a34f1f"/>
+            </linearGradient>
+            <linearGradient id="logoBackF" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5c8a6a"/>
+              <stop offset="100%" stop-color="#3c5f47"/>
+            </linearGradient>
+            <linearGradient id="logoFrontF" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#456b51"/>
+              <stop offset="100%" stop-color="#2c4a37"/>
+            </linearGradient>
+          </defs>
+          <circle cx="33" cy="13" r="6" fill="url(#logoSunF)"/>
+          <path d="M4 36L16 15L22 24L27 17L38 36H4Z" fill="url(#logoBackF)"/>
+          <path d="M22 24L27 17L44 36H24L22 24Z" fill="url(#logoFrontF)"/>
+        </svg>
+        ExploreNepal
+      </span>
       <p>Your complete digital guide to Nepal's natural wonders, cultural heritage and hidden gems.</p>
     </div>
     <div class="fcol"><h4>Explore</h4>
