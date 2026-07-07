@@ -45,7 +45,7 @@ let destinations = [
   {
     id: "pokhara", name: "Pokhara & Phewa Lake",
     province: "Gandaki Province", category: "lake",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1706323625285-648bb6825e03?w=800&q=80",
     description: "Nepal's adventure capital where Phewa Lake mirrors the snow-capped Annapurna and Machhapuchhre peaks at sunrise. The lakeside promenade is lined with cafes and adventure gear shops. Activities range from peaceful boat rides to heart-pounding paragliding launches from Sarangkot ridge.",
     latitude: 28.2096, longitude: 83.9856,
     bestSeason: "Sep–Nov, Mar–May", entryFee: "Free",
@@ -63,7 +63,7 @@ let destinations = [
   {
     id: "lumbini", name: "Lumbini – Birthplace of Buddha",
     province: "Lumbini Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1603792907191-89e55f70099a?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1616166831462-48a3e9089c20?w=800&q=80",
     description: "The birthplace of Siddhartha Gautama — the Buddha — and a UNESCO World Heritage Site. The sacred garden contains the Mayadevi Temple marking the exact birth spot, the ancient Ashoka Pillar from 249 BC, and a serene zone of international monasteries from around the globe.",
     latitude: 27.4833, longitude: 83.2761,
     bestSeason: "Oct–Mar", entryFee: "NPR 200",

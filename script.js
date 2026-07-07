@@ -213,7 +213,8 @@ function buildDestCards(list) {
     grid.appendChild(card);
   });
   revealCards();
-  setTimeout(upgradeWikiImages, 600);
+  // Wikipedia auto-photo-swap disabled — was overwriting correct curated photos with mismatched ones.
+  // setTimeout(upgradeWikiImages, 600);
 }
 
 /* ── 5. DESTINATION FILTERS ── */
@@ -421,7 +422,8 @@ function liveSearch(q) {
   }
   document.getElementById('search-section').scrollIntoView({ behavior: 'smooth' });
   revealCards();
-  setTimeout(upgradeWikiImages, 400);
+  // Wikipedia auto-photo-swap disabled — was overwriting correct curated photos with mismatched ones.
+  // setTimeout(upgradeWikiImages, 400);
 }
 
 function openSearchDetail(id) {
@@ -582,7 +584,8 @@ function upgradeWikiImages() {
     }).catch(function () {});
   }
 }
-setTimeout(upgradeWikiImages, 800);
+// Wikipedia auto-photo-swap disabled — was overwriting correct curated photos with mismatched ones.
+// setTimeout(upgradeWikiImages, 800);
 
 /* ── 15. SCROLL REVEAL ── */
 function revealCards() {
@@ -934,7 +937,7 @@ function fetchWikiImages(items, startIdx) {
                'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80'],
     heritage: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80',
                'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=700&q=80'],
-    lake:     ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=80',
+    lake:     ['https://images.unsplash.com/photo-1706323625285-648bb6825e03?w=700&q=80',
                'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=700&q=80'],
     nature:   ['https://images.unsplash.com/photo-1571150825816-3b9c10640445?w=700&q=80',
                'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=700&q=80'],
