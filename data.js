@@ -54,7 +54,7 @@ let destinations = [
   {
     id: "chitwan", name: "Chitwan National Park",
     province: "Bagmati Province", category: "nature",
-    image: "https://images.unsplash.com/photo-1571150825816-3b9c10640445?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1534215782964-d58601aa091c?w=800&q=80",
     description: "A UNESCO World Heritage Site and one of Asia's finest wildlife reserves. Chitwan protects the endangered one-horned rhinoceros, Royal Bengal tiger, gharial crocodiles and over 540 bird species. Jungle safaris by jeep, elephant and dugout canoe offer extraordinary encounters with wildlife.",
     latitude: 27.5291, longitude: 84.3542,
     bestSeason: "Oct–Mar", entryFee: "USD 25",
@@ -72,7 +72,7 @@ let destinations = [
   {
     id: "rara", name: "Rara Lake",
     province: "Karnali Province", category: "lake",
-    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1631873505041-6851e1f730ca?w=800&q=80",
     description: "Nepal's largest and deepest lake hidden in the remote northwest at 2,990 m. The sapphire-blue water reflects pine forests and snow-capped ridges in perfect stillness. Rara National Park protects red pandas, Himalayan black bears and musk deer. Very few tourists ever reach this pristine wilderness.",
     latitude: 29.5269, longitude: 82.0883,
     bestSeason: "Apr–Jun, Sep–Nov", entryFee: "NPR 3,000",
@@ -117,7 +117,7 @@ let destinations = [
   {
     id: "swayambhunath", name: "Swayambhunath (Monkey Temple)",
     province: "Bagmati Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1665435246383-4103fc803522?w=800&q=80",
     description: "Perched atop a wooded hill above Kathmandu, Swayambhunath is one of Nepal's oldest religious sites. The all-seeing eyes of the Buddha on the golden spire watch over the valley. Hundreds of monkeys roam freely around the stupa. The 365 steps up give spectacular valley views.",
     latitude: 27.7149, longitude: 85.2907,
     bestSeason: "Year-round", entryFee: "NPR 200",
@@ -153,7 +153,7 @@ let destinations = [
   {
     id: "patan", name: "Patan Durbar Square",
     province: "Bagmati Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1598346762291-aee88549193f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1665435246418-049399b51c3d?w=800&q=80",
     description: "The most artistically rich of the three royal squares in Kathmandu Valley. Patan's UNESCO-listed Durbar Square is packed with intricately carved temples, water spouts and courtyards. The Patan Museum inside the old royal palace is considered the finest museum in Nepal.",
     latitude: 27.6722, longitude: 85.3250,
     bestSeason: "Oct–Mar", entryFee: "NPR 1,000",
@@ -162,7 +162,7 @@ let destinations = [
   {
     id: "bandipur", name: "Bandipur Village",
     province: "Gandaki Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1603269154553-49b805f9ce0f?w=800&q=80",
     description: "A car-free Newari hilltop town frozen in the 19th century. Bandipur's pedestrian-only main street is lined with traditional architecture housing tea shops, craft stores and small hotels. At dawn, the valley below fills with cloud and the snow peaks glow behind the horizon.",
     latitude: 27.9333, longitude: 84.4167,
     bestSeason: "Oct–Mar", entryFee: "Free",
@@ -171,7 +171,7 @@ let destinations = [
   {
     id: "ilam", name: "Ilam Tea Gardens",
     province: "Koshi Province", category: "nature",
-    image: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1742106856193-5cc3424ac450?w=800&q=80",
     description: "Nepal's premier tea-growing region in the eastern hills near the Sikkim border. The rolling green terraces of Ilam produce some of South Asia's finest Orthodox teas. Misty mornings, friendly workers picking leaves by hand, and the aroma of fresh tea make a visit here unique.",
     latitude: 26.9167, longitude: 87.9333,
     bestSeason: "Mar–May, Oct–Nov", entryFee: "Free",
@@ -180,7 +180,7 @@ let destinations = [
   {
     id: "janakpur", name: "Janakpur – Janaki Mandir",
     province: "Madhesh Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1545126913-da4f3c7ad3d1?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1599820225897-e6ce3ee622a8?w=800&q=80",
     description: "The birthplace of Goddess Sita and one of Hinduism's holiest sites. The magnificent Janaki Mandir temple, built in 1911 in Mughal-Rajput style, is the centrepiece of this ancient city. Janakpur is also home of Mithila folk art — intricate geometric patterns painted by women on homes.",
     latitude: 26.7333, longitude: 85.9333,
     bestSeason: "Oct–Mar", entryFee: "Free",
@@ -189,7 +189,7 @@ let destinations = [
   {
     id: "gosainkunda", name: "Gosainkunda Lake",
     province: "Bagmati Province", category: "lake",
-    image: "https://images.unsplash.com/photo-1439853949212-36589f9027c4?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1653043381112-e6516abce9aa?w=800&q=80",
     description: "A sacred alpine lake at 4,380 m believed to have been created when Lord Shiva struck the Himalayas with his trident. Every year during Janai Purnima, tens of thousands of pilgrims trek to bathe in its icy waters. The lake freezes from December to March.",
     latitude: 28.0833, longitude: 85.6167,
     bestSeason: "May–Jun, Sep–Oct", entryFee: "Langtang permit",
@@ -207,7 +207,7 @@ let destinations = [
   {
     id: "gorkha", name: "Gorkha Palace",
     province: "Gandaki Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1665435246390-4557a3112924?w=800&q=80",
     description: "The ancestral home of Prithvi Narayan Shah, the king who unified Nepal in the 18th century. The palace-temple complex sits atop a steep hill requiring about 1,000 steps to climb. The reward is the magnificent Gorkha Durbar palace with spectacular Himalayan views.",
     latitude: 27.9833, longitude: 84.6333,
     bestSeason: "Oct–Mar", entryFee: "NPR 500",
@@ -216,7 +216,7 @@ let destinations = [
   {
     id: "tansen", name: "Tansen (Palpa)",
     province: "Lumbini Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1712121499432-be93e7775c09?w=800&q=80",
     description: "A well-preserved Newari hilltop trading town famous for dhaka cloth weaving and bronze crafts. The ruined Rani Mahal palace on the Kali Gandaki riverbank below is sometimes called the Taj Mahal of Nepal. The old bazaar streets and mountain views make Tansen unforgettable.",
     latitude: 27.8667, longitude: 83.5500,
     bestSeason: "Oct–Mar", entryFee: "Free",
@@ -234,7 +234,7 @@ let destinations = [
   {
     id: "muktinath", name: "Muktinath Temple",
     province: "Gandaki Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1609234656388-0ff363383899?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1540961286473-8ad1368dc1bd?w=800&q=80",
     description: "One of the most sacred pilgrimage sites in Asia, holy to both Hindus and Buddhists. Situated at 3,800 m in Mustang district, the temple has 108 stone water spouts shaped like cow heads plus an eternal blue flame burning from natural gas.",
     latitude: 28.8167, longitude: 83.8667,
     bestSeason: "Mar–May, Sep–Nov", entryFee: "ACAP permit",
@@ -252,7 +252,7 @@ let destinations = [
   {
     id: "tilicho", name: "Tilicho Lake",
     province: "Gandaki Province", category: "lake",
-    image: "https://images.unsplash.com/photo-1445375011782-2384686778a0?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1599224093049-80d0fc9fbab2?w=800&q=80",
     description: "One of the world's highest lakes at 4,919 m in the Annapurna region. The lake's vivid blue-green surface framed by the sheer walls of the Great Barrier ridge and Tilicho Peak creates a scene of breathtaking otherworldly beauty.",
     latitude: 28.6833, longitude: 83.8000,
     bestSeason: "Apr–May, Sep–Oct", entryFee: "ACAP permit",
