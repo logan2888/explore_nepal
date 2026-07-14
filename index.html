@@ -84,13 +84,52 @@
   <div class="scroll-hint">↓ scroll</div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">🏔️ Mountains</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🏞️ Lakes</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🛕 Heritage</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🌿 Nature</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🥾 Trekking</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🍛 Cuisine</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🏨 Hotels</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🎉 Festivals</span>
+    <span class="marquee-dot">•</span>
+    <!-- duplicate set for seamless loop -->
+    <span class="marquee-item">🏔️ Mountains</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🏞️ Lakes</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🛕 Heritage</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🌿 Nature</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🥾 Trekking</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🍛 Cuisine</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🏨 Hotels</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🎉 Festivals</span>
+    <span class="marquee-dot">•</span>
+  </div>
+</div>
+
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat"><span class="sn">8,849<small>m</small></span><span class="sl">Everest Height</span></div>
-  <div class="stat"><span class="sn">10</span><span class="sl">UNESCO Sites</span></div>
-  <div class="stat"><span class="sn">800+</span><span class="sl">Bird Species</span></div>
-  <div class="stat"><span class="sn">125</span><span class="sl">Ethnic Groups</span></div>
-  <div class="stat"><span class="sn">32</span><span class="sl">Destinations</span></div>
+  <div class="stat"><span class="sn" data-count="8849" data-suffix="m">0</span><span class="sl">Everest Height</span></div>
+  <div class="stat"><span class="sn" data-count="10" data-suffix="">0</span><span class="sl">UNESCO Sites</span></div>
+  <div class="stat"><span class="sn" data-count="800" data-suffix="+">0</span><span class="sl">Bird Species</span></div>
+  <div class="stat"><span class="sn" data-count="125" data-suffix="">0</span><span class="sl">Ethnic Groups</span></div>
+  <div class="stat"><span class="sn" data-count="32" data-suffix="">0</span><span class="sl">Destinations</span></div>
 </div>
 
 <!-- SEARCH -->
@@ -261,7 +300,7 @@
       <img data-src="https://images.unsplash.com/photo-1609348745238-e71a01a9eed0?w=800&q=80" alt="Pashupatinath" loading="lazy"><span>Pashupatinath Temple</span>
     </div>
     <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
-      <img data-src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800&q=80", alt="Bhaktapur" loading="lazy"><span>Bhaktapur Durbar Square</span>
+      <img data-src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800&q=80" alt="Bhaktapur" loading="lazy"><span>Bhaktapur Durbar Square</span>
     </div>
     <div class="gal-item" data-cat="heritage" onclick="openLightbox(this)">
       <img data-src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80" alt="Swayambhunath" loading="lazy"><span>Swayambhunath (Monkey Temple)</span>
@@ -414,7 +453,7 @@
       <h3>What is ExploreNepal?</h3>
       <p>ExploreNepal is a comprehensive web-based tourism guide for Nepal, developed as a Final Year Project for the Bachelor of Information Technology program at Phoenix College of Management. The platform is built using HTML5, CSS3 and JavaScript for the frontend, with a Node.js and Express.js backend server and a MongoDB Atlas cloud database.</p>
       <h3>Why was it built?</h3>
-      <p>Despite Nepal being one of the world's finest tourism destinations, its digital infrastructure is scattered and incomplete. Tourists struggle to find reliable up-to-date information in one place. ExploreNepal bridges this gap with a single unified platform covering 32 destinations, hotels, restaurants, maps and trip planning tools.</p>
+      <p>Despite Nepal being one of the world's finest tourism destinations, its digital infrastructure is scattered and incomplete. Tourists struggle to find reliable up-to-date information in one place. ExploreNepal bridges this gap with a single unified platform covering 30 destinations, hotels, restaurants, maps and trip planning tools.</p>
       <h3>Key Features</h3>
       <div class="about-features">
         <div class="af-item"><span>🔍</span><div><strong>Smart Search</strong><p>Search all 30 destinations by name, province, category or activity.</p></div></div>
@@ -443,14 +482,15 @@
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="sec-head reveal">
-    <h2>GET IN TOUCH</h2>
+    <span class="sec-tag">Get in Touch</span>
+    <h2>Plan Your Nepal Trip</h2>
     <p>Fill the form and we will get back to you within 24 hours</p>
   </div>
   <div class="contact-wrap">
     <div class="contact-form">
       <div class="frow"><label>Your Name</label><input type="text" id="c-name" placeholder="e.g. Rijan Khatri" /></div>
       <div class="frow"><label>Email Address</label><input type="email" id="c-email" placeholder="you@email.com" /></div>
-      <div class="frow"><label>Your Message</label><textarea id="c-msg" rows="5" placeholder="write down your thought or questions..."></textarea></div>
+      <div class="frow"><label>Your Message</label><textarea id="c-msg" rows="5" placeholder="Travel dates, group size, questions…"></textarea></div>
       <button class="btn btn-green" onclick="submitForm()">Send Message ✈</button>
       <p class="form-ok" id="form-ok">✅ Thank you! We will respond within 24 hours.</p>
     </div>
@@ -462,6 +502,41 @@
     </div>
   </div>
 </section>
+
+<!-- MARQUEE 2 -->
+<div class="marquee-wrap marquee-alt">
+  <div class="marquee-track">
+    <span class="marquee-item">🏔️ 8,849m Everest</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🛕 10 UNESCO Sites</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🐦 800+ Bird Species</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🧑‍🤝‍🧑 125 Ethnic Groups</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">📍 32 Destinations</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🏨 10 Hotels</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🍽️ 10 Restaurants</span>
+    <span class="marquee-dot">•</span>
+    <!-- duplicate set for seamless loop -->
+    <span class="marquee-item">🏔️ 8,849m Everest</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🛕 10 UNESCO Sites</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🐦 800+ Bird Species</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🧑‍🤝‍🧑 125 Ethnic Groups</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">📍 32 Destinations</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🏨 10 Hotels</span>
+    <span class="marquee-dot">•</span>
+    <span class="marquee-item">🍽️ 10 Restaurants</span>
+    <span class="marquee-dot">•</span>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -589,6 +664,54 @@
     document.addEventListener('DOMContentLoaded', initReveal);
   } else {
     initReveal();
+  }
+})();
+
+// Animated stat counters — purely additive, does not touch any existing app logic.
+(function () {
+  function formatNum(n) {
+    return n.toLocaleString('en-US');
+  }
+  function animateCount(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    var suffix = el.getAttribute('data-suffix') || '';
+    var duration = 1400;
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      var current = Math.floor(eased * target);
+      el.textContent = formatNum(current) + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = formatNum(target) + suffix;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+  function initCounters() {
+    var counters = document.querySelectorAll('.sn[data-count]');
+    if (!counters.length) return;
+    if (!('IntersectionObserver' in window)) {
+      counters.forEach(animateCount);
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function (el) { io.observe(el); });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCounters);
+  } else {
+    initCounters();
   }
 })();
 </script>

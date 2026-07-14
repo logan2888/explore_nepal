@@ -27,7 +27,7 @@ let destinations = [
   {
     id: "boudhanath", name: "Boudhanath Stupa",
     province: "Bagmati Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1481081156127-f074cc853052?w=800&q=80",
     description: "One of the largest Buddhist stupas in the world and a UNESCO World Heritage Site. The giant white dome is topped with gilded eyes of the Buddha gazing in all four directions. Tibetan pilgrims circle the stupa constantly, spinning prayer wheels and chanting mantras.",
     latitude: 27.7215, longitude: 85.3620,
     bestSeason: "Year-round", entryFee: "NPR 400",
@@ -36,7 +36,7 @@ let destinations = [
   {
     id: "pashupatinath", name: "Pashupatinath Temple",
     province: "Bagmati Province", category: "heritage",
-    image: "https://images.unsplash.com/photo-1609348745238-e71a01a9eed0?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1752659511871-979ee5289676?w=800&q=80",
     description: "The most sacred Hindu temple in Nepal, dedicated to Lord Shiva on the banks of the holy Bagmati River. The complex includes hundreds of shrines, cremation ghats and ashrams. Sadhus smeared in ash sit in meditation near the ghats. The evening Aarti ceremony is deeply moving.",
     latitude: 27.7105, longitude: 85.3487,
     bestSeason: "Year-round (Maha Shivaratri is spectacular)", entryFee: "NPR 1,000",
@@ -144,7 +144,7 @@ let destinations = [
   {
     id: "bardiya", name: "Bardia National Park",
     province: "Lumbini Province", category: "nature",
-    image: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1562975444-d910f117a84f?w=800&q=80",
     description: "Nepal's largest national park in the western Terai — wilder and far less visited than Chitwan. Bardia has a high concentration of tigers and is one of the best places in Asia to spot them. The Karnali River supports gharial crocodiles and the endangered Gangetic river dolphin.",
     latitude: 28.3833, longitude: 81.3167,
     bestSeason: "Oct–Mar", entryFee: "USD 20–25",
