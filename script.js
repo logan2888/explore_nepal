@@ -1,6 +1,31 @@
 
 const API = 'https://explorenepal-backend.onrender.com/api';
 
+/* Skeleton loading shimmer — shows placeholder cards immediately while
+   initApp() fetches live data from the backend. Purely additive/cosmetic;
+   buildDestCards/buildHotelCards/buildRestoCards safely overwrite these
+   via grid.innerHTML = '' once real data arrives. */
+function showSkeletonCards(gridId, count) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  let html = '';
+  for (let i = 0; i < count; i++) {
+    html += `
+      <div class="card skeleton-card">
+        <div class="card-img skeleton-block skeleton-img"></div>
+        <div class="card-body">
+          <div class="skeleton-block skeleton-line title"></div>
+          <div class="skeleton-block skeleton-line"></div>
+          <div class="skeleton-block skeleton-line short"></div>
+        </div>
+      </div>`;
+  }
+  grid.innerHTML = html;
+}
+showSkeletonCards('dest-grid', 6);
+showSkeletonCards('hotel-grid', 6);
+showSkeletonCards('resto-grid', 6);
+
 async function loadAllData() {
   const [destData, hotelData, restoData] = await Promise.all([
     fetch(`${API}/destinations`).then(r => r.json()),
@@ -48,7 +73,35 @@ console.log("Firebase connected!");
 /* ── 1. NAVBAR ── */
 window.addEventListener('scroll', function () {
   document.getElementById('navbar').classList.toggle('solid', window.scrollY > 60);
+
+  // Scroll progress bar — purely additive
+  var bar = document.getElementById('scroll-progress');
+  if (bar) {
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+
+  // Floating parallax mountains — purely additive, only while hero is in view
+  var heroSection = document.querySelector('.hero');
+  if (heroSection && window.scrollY < window.innerHeight) {
+    var parallaxOffset = window.scrollY * 0.25;
+    heroSection.style.setProperty('--parallax-y', parallaxOffset + 'px');
+  }
 });
+
+/* Cursor spotlight in hero — purely additive, follows mouse via CSS variables */
+(function () {
+  var heroEl = document.querySelector('.hero');
+  if (!heroEl) return;
+  heroEl.addEventListener('mousemove', function (e) {
+    var rect = heroEl.getBoundingClientRect();
+    var x = ((e.clientX - rect.left) / rect.width) * 100;
+    var y = ((e.clientY - rect.top) / rect.height) * 100;
+    heroEl.style.setProperty('--mx', x + '%');
+    heroEl.style.setProperty('--my', y + '%');
+  });
+})();
 
 /* ── 2. HAMBURGER ── */
 document.getElementById('hamburger').addEventListener('click', function () {
@@ -162,6 +215,7 @@ function submitReview(id) {
   if (!text)   { alert('Please write a review.');        return; }
 
   saveReview(id, name, rating, text);
+  celebrateSuccess('Review submitted — thank you!');
 
   /* Refresh the reviews list immediately */
   const list = getReviews(id);
@@ -528,6 +582,7 @@ function submitForm() {
   if (!name || !email || !msg) { alert('Please fill in your name, email and message.'); return; }
   const ok = document.getElementById('form-ok');
   ok.style.display = 'block';
+  celebrateSuccess('Message sent! We\'ll get back to you soon.');
   document.getElementById('c-name').value  = '';
   document.getElementById('c-email').value = '';
   document.getElementById('c-msg').value   = '';
@@ -642,6 +697,45 @@ function showToast(msg, type) {
   setTimeout(function() {
     t.classList.remove('show');
   }, 3000);
+}
+
+/* Success celebration: animated checkmark + confetti burst.
+   Purely visual, self-contained — safe to call from anywhere. */
+function celebrateSuccess(msg) {
+  showToast(msg, 'success');
+
+  // Checkmark badge
+  var badge = document.createElement('div');
+  badge.className = 'success-badge';
+  badge.innerHTML = '<svg viewBox="0 0 52 52" class="success-check"><circle class="success-check-circle" cx="26" cy="26" r="23" fill="none"/><path class="success-check-mark" fill="none" d="M14 27l7 7 16-16"/></svg>';
+  document.body.appendChild(badge);
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() { badge.classList.add('show'); });
+  });
+
+  // Confetti burst
+  var colors = ['#ff4d3d', '#2d9d6f', '#ffd166', '#4f7a5c', '#fff'];
+  var confettiWrap = document.createElement('div');
+  confettiWrap.className = 'confetti-wrap';
+  for (var i = 0; i < 24; i++) {
+    var piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+    piece.style.left = (45 + Math.random() * 10) + '%';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.setProperty('--dx', (Math.random() * 2 - 1) * 220 + 'px');
+    piece.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
+    piece.style.animationDelay = (Math.random() * 0.15) + 's';
+    confettiWrap.appendChild(piece);
+  }
+  document.body.appendChild(confettiWrap);
+
+  setTimeout(function() {
+    badge.classList.remove('show');
+    setTimeout(function() {
+      badge.remove();
+      confettiWrap.remove();
+    }, 400);
+  }, 1600);
 }
 
 /* Open/close modal */
