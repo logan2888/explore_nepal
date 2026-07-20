@@ -592,3 +592,12 @@ a     { text-decoration: none; color: inherit; }
   .lb-prev { left: 4px; } .lb-next { right: 4px; }
   .lb-prev, .lb-next { font-size: 2rem; padding: 8px 12px; }
 }
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
