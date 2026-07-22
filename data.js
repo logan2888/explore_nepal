@@ -275,6 +275,24 @@ let destinations = [
     latitude: 26.9500, longitude: 86.4800,
     bestSeason: "Oct–Apr", entryFee: "Free",
     activities: ["Nature Walk", "Bird Watching", "Village Tour", "River Walk", "Photography"]
+  },
+  {
+    id: "ghandruk", name: "Ghandruk Village",
+    province: "Gandaki Province", category: "heritage",
+    image: "https://images.unsplash.com/photo-1544149008-e7bc77527c66?w=800&q=80",
+    description: "The largest Gurung settlement in the Annapurna region, Ghandruk is a picturesque stone-and-slate village terraced into the hillside at 2,012m. It's a key stop on the Annapurna Base Camp and Poon Hill treks, with the peaks of Annapurna South, Machapuchare and Hiunchuli rising directly above the rooftops.",
+    latitude: 28.3770, longitude: 83.8070,
+    bestSeason: "Mar–May, Sep–Nov", entryFee: "Included in ACAP permit",
+    activities: ["Trekking", "Gurung Culture Museum", "Photography", "Homestays", "Village Walk"]
+  },
+  {
+    id: "namobuddha", name: "Namobuddha",
+    province: "Bagmati Province", category: "heritage",
+    image: "https://images.unsplash.com/photo-1668966780008-b7dae98f61f3?w=800&q=80",
+    description: "One of the holiest Buddhist pilgrimage sites in the Kathmandu Valley, Namobuddha marks the spot where, according to legend, Prince Mahasattva offered his body to a starving tigress. A large stupa and active monastery sit atop a ridge with sweeping views of the surrounding hills, a peaceful day trip from Dhulikhel or Panauti.",
+    latitude: 27.5589, longitude: 85.5647,
+    bestSeason: "Oct–Mar, Mar–May", entryFee: "Free",
+    activities: ["Pilgrimage", "Monastery Visit", "Short Hiking", "Meditation", "Photography"]
   }
 ];
 
