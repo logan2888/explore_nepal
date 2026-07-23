@@ -48,6 +48,7 @@
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#destinations" onclick="openFavorites()">♡ Favorites <span id="fav-count" class="fav-count-badge" style="display:none;">0</span></a></li>
   </ul>
   <div class="nav-auth" id="nav-auth">
     <button class="nav-login-btn" onclick="openAuthModal('login')">🔐 Login</button>
@@ -240,6 +241,7 @@
   <div class="plan-actions">
     <button class="btn btn-grey"  onclick="clearPlanner()">🗑 Clear All</button>
     <button class="btn btn-green" onclick="window.print()">🖨 Print Itinerary</button>
+    <button class="btn btn-green" onclick="downloadItineraryPDF()">⬇ Download PDF</button>
   </div>
 </section>
 
@@ -642,6 +644,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="data.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="script.js"></script>
 <script>
 // Scroll-reveal: purely additive, does not touch any existing app logic/IDs.

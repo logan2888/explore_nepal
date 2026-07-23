@@ -52,6 +52,7 @@ async function initApp() {
   }
 }
 initApp();
+updateFavCount();
 
 // ── FIREBASE SETUP ──────────────────────────────────────────
 const firebaseConfig = {
@@ -165,6 +166,144 @@ function getAvgRating(id) {
   return Math.round((list.reduce((a, r) => a + r.rating, 0) / list.length) * 10) / 10;
 }
 
+/* ── COMPARE DESTINATIONS (in-memory, session-based) ── */
+let compareList = [];
+
+function toggleCompare(id, checkboxEl) {
+  const idx = compareList.indexOf(id);
+  if (idx > -1) {
+    compareList.splice(idx, 1);
+  } else {
+    if (compareList.length >= 3) {
+      showToast('You can compare up to 3 destinations at a time', 'error');
+      if (checkboxEl) checkboxEl.checked = false;
+      return;
+    }
+    compareList.push(id);
+  }
+  updateCompareBar();
+}
+
+function updateCompareBar() {
+  let bar = document.getElementById('compare-bar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'compare-bar';
+    bar.className = 'compare-bar';
+    document.body.appendChild(bar);
+  }
+  if (compareList.length === 0) {
+    bar.classList.remove('show');
+    return;
+  }
+  const names = compareList.map(id => {
+    const d = destinations.find(x => x.id === id);
+    return d ? d.name : id;
+  });
+  bar.innerHTML = `
+    <span class="compare-bar-text">Comparing: ${names.join(' vs ')}</span>
+    <button class="compare-bar-btn" onclick="showCompareModal()">Compare Now →</button>
+    <button class="compare-bar-clear" onclick="clearCompare()">Clear</button>`;
+  bar.classList.add('show');
+}
+
+function clearCompare() {
+  compareList = [];
+  updateCompareBar();
+  document.querySelectorAll('.compare-check input').forEach(cb => cb.checked = false);
+}
+
+function showCompareModal() {
+  if (compareList.length < 2) {
+    showToast('Select at least 2 destinations to compare', 'error');
+    return;
+  }
+  const picks = compareList.map(id => destinations.find(x => x.id === id)).filter(Boolean);
+  let overlay = document.getElementById('compare-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'compare-overlay';
+    overlay.className = 'compare-overlay';
+    overlay.onclick = function (e) { if (e.target === overlay) closeCompareModal(); };
+    document.body.appendChild(overlay);
+  }
+  const cols = picks.map(d => `
+    <div class="compare-col">
+      <div class="compare-col-img" style="background-image:url('${d.image}')"></div>
+      <h3>${d.name}</h3>
+      <div class="compare-row"><strong>Province</strong><span>${d.province}</span></div>
+      <div class="compare-row"><strong>Category</strong><span>${cap(d.category)}</span></div>
+      <div class="compare-row"><strong>Best Season</strong><span>${d.bestSeason}</span></div>
+      <div class="compare-row"><strong>Entry Fee</strong><span>${d.entryFee}</span></div>
+      <div class="compare-row"><strong>Rating</strong><span>${getAvgRating(d.id) > 0 ? getAvgRating(d.id) + ' ★' : 'No reviews yet'}</span></div>
+      <div class="compare-row"><strong>Activities</strong><span>${d.activities.join(', ')}</span></div>
+      <button class="btn btn-green" style="margin-top:14px;width:100%;" onclick="closeCompareModal(); openDestDetail('${d.id}')">View Full Details</button>
+    </div>`).join('');
+  overlay.innerHTML = `
+    <div class="compare-modal">
+      <button class="compare-modal-close" onclick="closeCompareModal()">✕</button>
+      <h2 class="compare-modal-title">Comparing Destinations</h2>
+      <div class="compare-grid">${cols}</div>
+    </div>`;
+  overlay.classList.add('open');
+}
+
+function closeCompareModal() {
+  const overlay = document.getElementById('compare-overlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+/* ── FAVORITES / WISHLIST (localStorage) ── */
+function getFavorites() {
+  try { return JSON.parse(localStorage.getItem('enr-favorites')) || []; }
+  catch (e) { return []; }
+}
+
+function isFavorite(id) {
+  return getFavorites().includes(id);
+}
+
+function toggleFavorite(id, btnEl) {
+  let favs = getFavorites();
+  const wasFav = favs.includes(id);
+  if (wasFav) {
+    favs = favs.filter(f => f !== id);
+  } else {
+    favs.push(id);
+  }
+  localStorage.setItem('enr-favorites', JSON.stringify(favs));
+  if (btnEl) {
+    btnEl.classList.toggle('is-fav', !wasFav);
+    btnEl.textContent = !wasFav ? '♥' : '♡';
+  }
+  updateFavCount();
+  if (!wasFav) {
+    showToast('Added to favorites ♥', 'success');
+  }
+}
+
+function updateFavCount() {
+  const el = document.getElementById('fav-count');
+  if (el) {
+    const n = getFavorites().length;
+    el.textContent = n;
+    el.style.display = n > 0 ? 'inline-flex' : 'none';
+  }
+}
+
+function openFavorites() {
+  const favs = getFavorites();
+  const favDestinations = destinations.filter(d => favs.includes(d.id));
+  document.getElementById('dest-detail-panel').innerHTML = '';
+  buildDestCards(favDestinations.length ? favDestinations : []);
+  if (!favDestinations.length) {
+    document.getElementById('dest-grid').innerHTML =
+      '<p style="grid-column:1/-1;text-align:center;color:#888;padding:40px;">No favorites yet — click the ♡ on any destination card to save it here.</p>';
+  }
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  document.getElementById('destinations').scrollIntoView({ behavior: 'smooth' });
+}
+
 function reviewsHTML(id) {
   const list = getReviews(id);
   const items = list.length
@@ -247,12 +386,15 @@ function buildDestCards(list) {
   }
   list.forEach(function (d) {
     const avg  = getAvgRating(d.id);
+    const fav  = isFavorite(d.id);
+    const inCompare = compareList.includes(d.id);
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
       <div class="card-img" id="img-${d.id}"
            style="background-image:url('${d.image}'); background-color:#2d6a4f;">
         <span class="card-badge b-${d.category}">${cap(d.category)}</span>
+        <button class="fav-btn ${fav ? 'is-fav' : ''}" onclick="event.stopPropagation(); toggleFavorite('${d.id}', this)" title="Save to favorites">${fav ? '♥' : '♡'}</button>
       </div>
       <div class="card-body">
         <h3>${d.name}</h3>
@@ -263,6 +405,10 @@ function buildDestCards(list) {
         </div>
         <div class="card-rating">${starsHTML(avg)} ${avg > 0 ? avg + ' (' + getReviews(d.id).length + ' reviews)' : 'No reviews yet'}</div>
         <button class="card-btn" onclick="openDestDetail('${d.id}')">Read More + Reviews →</button>
+        <label class="compare-check">
+          <input type="checkbox" ${inCompare ? 'checked' : ''} onchange="toggleCompare('${d.id}', this)">
+          Add to Compare
+        </label>
       </div>`;
     grid.appendChild(card);
   });
@@ -572,6 +718,71 @@ function renderPlanner() {
     });
   });
   board.innerHTML = html;
+}
+
+/* ── DOWNLOAD ITINERARY AS PDF ── */
+function downloadItineraryPDF() {
+  if (!Object.keys(itinerary).length) {
+    showToast('Add some destinations to your itinerary first', 'error');
+    return;
+  }
+  if (typeof window.jspdf === 'undefined') {
+    showToast('PDF library still loading — try again in a moment', 'error');
+    return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  let y = 24;
+
+  // Header
+  doc.setFillColor(20, 22, 31);
+  doc.rect(0, 0, pageWidth, 34, 'F');
+  doc.setTextColor(255, 77, 61);
+  doc.setFontSize(20);
+  doc.setFont('helvetica', 'bold');
+  doc.text('ExploreNepal', 16, 22);
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Your Nepal Trip Itinerary', 16, 29);
+  y = 46;
+
+  doc.setTextColor(35, 37, 43);
+  const days = Object.keys(itinerary).map(Number).sort((a, b) => a - b);
+
+  days.forEach(function (day) {
+    if (y > 265) { doc.addPage(); y = 20; }
+    doc.setFillColor(45, 157, 111);
+    doc.roundedRect(14, y - 6, pageWidth - 28, 10, 2, 2, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Day ' + day, 18, y + 1);
+    y += 12;
+
+    doc.setTextColor(35, 37, 43);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'normal');
+    itinerary[day].forEach(function (name) {
+      if (y > 270) { doc.addPage(); y = 20; }
+      doc.text('•  ' + name, 20, y);
+      y += 8;
+    });
+    y += 4;
+  });
+
+  y += 6;
+  if (y > 275) { doc.addPage(); y = 20; }
+  doc.setDrawColor(230, 224, 214);
+  doc.line(14, y, pageWidth - 14, y);
+  y += 8;
+  doc.setFontSize(9);
+  doc.setTextColor(107, 111, 118);
+  doc.text('Generated by ExploreNepal — explorenepal.com', 14, y);
+
+  doc.save('ExploreNepal-Itinerary.pdf');
+  celebrateSuccess('Itinerary downloaded!');
 }
 
 /* ── 12. CONTACT FORM ── */

@@ -260,6 +260,80 @@ a     { text-decoration: none; color: inherit; }
 .card-img { height: 210px; background-size: cover; background-position: center; background-color: #3c5f47; position: relative; flex-shrink: 0; overflow: hidden; }
 .card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.12) 100%); }
 .card-badge { position: absolute; top: 12px; left: 12px; color: #fff; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: capitalize; z-index: 1; backdrop-filter: blur(4px); }
+.fav-btn {
+  position: absolute; top: 10px; right: 10px; z-index: 1;
+  width: 34px; height: 34px; border-radius: 50%; border: none;
+  background: rgba(20,22,31,0.45); backdrop-filter: blur(4px);
+  color: #fff; font-size: 1.15rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s var(--bounce), background 0.2s ease, color 0.2s ease;
+}
+.fav-btn:hover { transform: scale(1.15); background: rgba(20,22,31,0.65); }
+.fav-btn.is-fav { color: var(--gold); background: rgba(255,255,255,0.9); }
+.fav-btn.is-fav:hover { background: #fff; }
+.fav-count-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 18px; padding: 0 5px; border-radius: 50px;
+  background: var(--gold); color: #fff; font-size: 0.68rem; font-weight: 800;
+  margin-left: 4px; vertical-align: middle;
+}
+
+/* ── COMPARE DESTINATIONS ── */
+.compare-check {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 10px; font-size: 0.82rem; color: var(--muted);
+  cursor: pointer; user-select: none;
+}
+.compare-check input { width: 15px; height: 15px; cursor: pointer; accent-color: var(--sage); }
+
+.compare-bar {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120px);
+  background: var(--dark); color: #fff; padding: 14px 22px; border-radius: 50px;
+  display: flex; align-items: center; gap: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  z-index: 8000; opacity: 0; transition: transform 0.4s var(--bounce), opacity 0.3s ease;
+  max-width: 92vw; flex-wrap: wrap; justify-content: center;
+}
+.compare-bar.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.compare-bar-text { font-size: 0.87rem; font-weight: 600; }
+.compare-bar-btn {
+  background: var(--gold); color: #fff; border: none; padding: 8px 18px;
+  border-radius: 50px; font-weight: 700; cursor: pointer; font-family: var(--fb);
+  font-size: 0.85rem; transition: background 0.2s, transform 0.3s var(--bounce);
+}
+.compare-bar-btn:hover { background: var(--gold-d); transform: scale(1.05); }
+.compare-bar-clear {
+  background: none; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7);
+  padding: 7px 14px; border-radius: 50px; cursor: pointer; font-family: var(--fb); font-size: 0.82rem;
+}
+.compare-bar-clear:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+
+.compare-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(12,14,20,0.8);
+  z-index: 15000; align-items: center; justify-content: center; padding: 24px;
+  backdrop-filter: blur(4px); overflow-y: auto;
+}
+.compare-overlay.open { display: flex; }
+.compare-modal {
+  background: #fff; border-radius: var(--radius); padding: 32px; max-width: 1100px; width: 100%;
+  max-height: 88vh; overflow-y: auto; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+}
+.compare-modal-close {
+  position: absolute; top: 18px; right: 20px; background: #f0ede6; border: none;
+  width: 34px; height: 34px; border-radius: 50%; font-size: 1rem; cursor: pointer;
+}
+.compare-modal-close:hover { background: #e4dfd5; }
+.compare-modal-title { font-family: var(--fh); font-size: 1.6rem; color: var(--dark); margin-bottom: 24px; }
+.compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.compare-col { background: var(--bg2); border-radius: var(--radius); padding: 18px; }
+.compare-col-img { height: 140px; border-radius: 10px; background-size: cover; background-position: center; margin-bottom: 12px; }
+.compare-col h3 { font-family: var(--fh); font-size: 1.15rem; color: var(--dark); margin-bottom: 12px; }
+.compare-row { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 1px solid #e6e0d6; font-size: 0.85rem; }
+.compare-row strong { color: var(--sage-d); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.compare-row span { color: var(--text); }
+@media (max-width: 600px) {
+  .compare-modal { padding: 20px; }
+  .compare-bar { padding: 12px 18px; gap: 10px; }
+}
 .b-mountain { background: rgba(20,22,31,0.72); }
 .b-heritage  { background: rgba(163,79,31,0.82); }
 .b-lake      { background: rgba(30,90,140,0.8); }
