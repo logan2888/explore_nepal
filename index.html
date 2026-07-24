@@ -4,6 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ExploreNepal — Tourism Guide</title>
+  <meta name="description" content="Discover Nepal's mountains, temples, jungles and culture. Browse 30+ destinations, plan your trip, find hotels and restaurants, all in one place." />
+
+<!-- Open Graph tags (Facebook, WhatsApp, LinkedIn preview cards) -->
+<meta property="og:title" content="ExploreNepal — Discover the Roof of the World" />
+<meta property="og:description" content="Explore Nepal's mountains, temples, jungles and culture. Plan your trip, browse destinations, hotels and restaurants." />
+<meta property="og:image" content="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80" />
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80" />
+<meta property="og:type" content="website" />
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ExploreNepal — Discover the Roof of the World" />
+<meta name="twitter:description" content="Explore Nepal's mountains, temples, jungles and culture, all in one place." />
+<meta name="twitter:image" content="https://explore-nepal12.netlify.app/preview.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -46,6 +60,7 @@
     <li><a href="#map-section">Map</a></li>
     <li><a href="#planner">Planner</a></li>
     <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#festivals">Festivals</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#destinations" onclick="openFavorites()">♡ Favorites <span id="fav-count" class="fav-count-badge" style="display:none;">0</span></a></li>
@@ -242,6 +257,7 @@
     <button class="btn btn-grey"  onclick="clearPlanner()">🗑 Clear All</button>
     <button class="btn btn-green" onclick="window.print()">🖨 Print Itinerary</button>
     <button class="btn btn-green" onclick="downloadItineraryPDF()">⬇ Download PDF</button>
+    <button class="btn btn-grey" onclick="showItineraryQR()">📱 QR Code</button>
   </div>
 </section>
 
@@ -445,6 +461,41 @@
   </div>
 </div>
 
+<!-- FESTIVAL CALENDAR -->
+<section class="section" id="festivals">
+  <div class="sec-head reveal">
+    <span class="sec-tag">Plan Around The Culture</span>
+    <h2>Nepali Festival Calendar</h2>
+    <p>Nepal follows a lunar calendar, so dates shift slightly each year — these are 2026 dates. Ask locally to confirm exact timing closer to your trip.</p>
+  </div>
+  <div class="fest-grid reveal-stagger">
+    <div class="fest-card">
+      <span class="fest-date"><strong>14</strong>Jan</span>
+      <div class="fest-body"><h4>Maghe Sankranti</h4><p>Harvest festival marking the end of winter — river dips, sesame sweets and thanksgiving pujas nationwide.</p></div>
+    </div>
+    <div class="fest-card">
+      <span class="fest-date"><strong>2–3</strong>Mar</span>
+      <div class="fest-body"><h4>Holi — Festival of Colors</h4><p>Nationwide color-throwing celebration. Best experienced in Kathmandu/Bhaktapur Durbar Square or Pokhara Lakeside.</p></div>
+    </div>
+    <div class="fest-card">
+      <span class="fest-date"><strong>~13</strong>Apr</span>
+      <div class="fest-body"><h4>Bisket Jatra & Nepali New Year</h4><p>Chariot-pulling festival in Bhaktapur marking the start of the Nepali calendar year.</p></div>
+    </div>
+    <div class="fest-card">
+      <span class="fest-date"><strong>4</strong>Oct</span>
+      <div class="fest-body"><h4>Indra Jatra</h4><p>Kathmandu's dramatic chariot procession honoring the Living Goddess Kumari, with masked dances in Durbar Square.</p></div>
+    </div>
+    <div class="fest-card fest-card-big">
+      <span class="fest-date"><strong>11–25</strong>Oct</span>
+      <div class="fest-body"><h4>Dashain — Nepal's Biggest Festival</h4><p>15 days honoring Goddess Durga's victory over evil. Main Tika day is October 21 — expect many businesses to close as families reunite nationwide.</p></div>
+    </div>
+    <div class="fest-card fest-card-big">
+      <span class="fest-date"><strong>8–12</strong>Nov</span>
+      <div class="fest-body"><h4>Tihar — Festival of Lights</h4><p>Five days honoring crows, dogs, cows and the sibling bond, with oil lamps and marigolds lighting up every home. Best photographed in Patan and Bhaktapur.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="section sec-alt" id="about">
   <div class="sec-head reveal">
@@ -466,7 +517,9 @@
         <div class="af-item"><span>⭐</span><div><strong>User Reviews</strong><p>Submit star ratings and written reviews for any destination.</p></div></div>
         <div class="af-item"><span>📱</span><div><strong>Fully Responsive</strong><p>Works perfectly on mobile phones, tablets and desktop computers.</p></div></div>
         <div class="af-item"><span>🖼️</span><div><strong>Real Photos</strong><p>Authentic Wikipedia and Wikimedia photos for every destination.</p></div></div>
-      </div>
+      <div class="af-item"><span>♡</span><div><strong>Favorites & Compare</strong><p>Save destinations to your wishlist and compare up to 3 side by side.</p></div></div>
+  <div class="af-item"><span>🎉</span><div><strong>Festival Calendar</strong><p>Plan your trip around Nepal's biggest cultural celebrations.</p></div></div>
+ </div>
     </div>
     <div class="about-side">
       <div class="dev-card">
@@ -486,8 +539,8 @@
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="sec-head reveal">
-    <span class="sec-tag">Get in Touch</span>
-    <h2>Plan Your Nepal Trip</h2>
+    
+    <h2>GET IN TOUCH</h2>
     <p>Fill the form and we will get back to you within 24 hours</p>
   </div>
   <div class="contact-wrap">

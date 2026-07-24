@@ -447,11 +447,36 @@ function openDestDetail(id) {
           <span>💰 <strong>Entry Fee:</strong> ${d.entryFee}</span>
         </div>
         <div class="detail-acts">${d.activities.map(a => `<span class="act-pill">${a}</span>`).join('')}</div>
+        <div class="share-row">
+          <span class="share-label">Share:</span>
+          <button class="share-btn share-wa" onclick="shareDestination('${d.id}','whatsapp')" title="Share on WhatsApp">💬</button>
+          <button class="share-btn share-fb" onclick="shareDestination('${d.id}','facebook')" title="Share on Facebook">📘</button>
+          <button class="share-btn share-copy" onclick="shareDestination('${d.id}','copy')" title="Copy link">🔗</button>
+        </div>
         ${reviewsHTML(d.id)}
         <button class="detail-close" onclick="closeDetail('dest-detail-panel')">✕ Close</button>
       </div>
     </div>`;
   panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function shareDestination(id, platform) {
+  const d = destinations.find(x => x.id === id);
+  if (!d) return;
+  const shareText = `Check out ${d.name} on ExploreNepal! ${d.description.slice(0, 100)}...`;
+  const shareUrl = window.location.origin + window.location.pathname + '#' + id;
+
+  if (platform === 'whatsapp') {
+    window.open('https://wa.me/?text=' + encodeURIComponent(shareText + ' ' + shareUrl), '_blank');
+  } else if (platform === 'facebook') {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank', 'width=600,height=400');
+  } else if (platform === 'copy') {
+    navigator.clipboard.writeText(shareUrl).then(function () {
+      showToast('Link copied to clipboard!', 'success');
+    }).catch(function () {
+      showToast('Could not copy link', 'error');
+    });
+  }
 }
 
 function closeDetail(pid) {
@@ -783,6 +808,37 @@ function downloadItineraryPDF() {
 
   doc.save('ExploreNepal-Itinerary.pdf');
   celebrateSuccess('Itinerary downloaded!');
+}
+
+/* ── QR CODE FOR ITINERARY ── */
+function showItineraryQR() {
+  if (!Object.keys(itinerary).length) {
+    showToast('Add some destinations to your itinerary first', 'error');
+    return;
+  }
+  const days = Object.keys(itinerary).map(Number).sort((a, b) => a - b);
+  let summary = 'My ExploreNepal Trip:\n';
+  days.forEach(function (day) {
+    summary += 'Day ' + day + ': ' + itinerary[day].join(', ') + '\n';
+  });
+  const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=' + encodeURIComponent(summary);
+
+  let overlay = document.getElementById('qr-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'qr-overlay';
+    overlay.className = 'compare-overlay';
+    overlay.onclick = function (e) { if (e.target === overlay) overlay.classList.remove('open'); };
+    document.body.appendChild(overlay);
+  }
+  overlay.innerHTML = `
+    <div class="qr-modal">
+      <button class="compare-modal-close" onclick="document.getElementById('qr-overlay').classList.remove('open')">✕</button>
+      <h3 class="qr-modal-title">Scan to Save Your Itinerary</h3>
+      <img src="${qrUrl}" alt="Itinerary QR Code" class="qr-img" />
+      <p class="qr-hint">Scan with your phone camera to view a text summary of your ${days.length}-day trip, no app needed.</p>
+    </div>`;
+  overlay.classList.add('open');
 }
 
 /* ── 12. CONTACT FORM ── */
