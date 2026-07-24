@@ -74,7 +74,7 @@ mongoose.connect(process.env.MONGO_URI).then(async () => {
   console.log('🗑️  Old data cleared');
 
   await Destination.insertMany(destinations);
-  console.log('✅ 32 Destinations imported!');
+  console.log('✅ 30 Destinations imported!');
 
   await Hotel.insertMany(hotels);
   console.log('✅ 10 Hotels imported!');

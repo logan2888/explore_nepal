@@ -9,14 +9,13 @@ A full-stack tourism web application showcasing Nepal's destinations, hotels, an
 
 ## 📸 Preview
 
+![ExploreNepal Homepage](image.png)
 
-
----
 
 ## ✨ Features
 
 ### Core
-- **32 destinations** across Nepal with detailed descriptions, best travel seasons, entry fees, and activities
+- **30 destinations** across Nepal with detailed descriptions, best travel seasons, entry fees, and activities
 - **10 hotels & 10 restaurants** with amenities, pricing, and contact info
 - **Interactive map** (Leaflet/OpenStreetMap) with colour-coded destination markers
 - **Smart search** across destinations by name, province, category, or activity
